@@ -10,7 +10,7 @@
          for(int i=0;i<nums.size();i++){
             arr[i]=nums[i];
         }
-        // arr=nums;
+        // arr=nums; you can use it direct too or sepratedly marking each index
         return  arr;
     }
 };
