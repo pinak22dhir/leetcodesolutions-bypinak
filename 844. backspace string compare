@@ -1,0 +1,32 @@
+class Solution {
+public:
+    string hash(string si){
+        stack<char> st;
+        if(si[0]!='#'){
+             st.push(si[0]);
+        }
+       
+        for(int i=1;i<si.size();i++){
+            if(!st.empty() && si[i]=='#'){
+                st.pop();
+            }
+          else if(si[i]!='#'){
+            st.push(si[i]);
+          }
+        }
+        string p="";
+        while(!st.empty()){
+            p=st.top()+p;
+            st.pop();
+        }
+        return p;
+    }
+    bool backspaceCompare(string s, string t) {
+        
+        string pi=hash(s);
+        string si=hash(t);
+       
+        return pi==si;
+        
+    }
+};
