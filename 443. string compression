@@ -1,0 +1,35 @@
+#include <vector>
+#include <map>
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        map<char, int> freq;
+
+         for (int i=0;i<chars.size();i++) {
+            freq[chars[i]]++;
+        }  
+
+        vector<char> ans; 
+
+       
+        for (auto& it : freq) {
+            ans.push_back(it.first); 
+            
+            if (it.second > 1) {
+                string freq_str = to_string(it.second);
+                for (char ch : freq_str) {
+                    ans.push_back(ch); 
+                }
+            }
+        }
+
+       
+       chars=ans;
+
+        return ans.size();
+    }
+};
