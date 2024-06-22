@@ -1,0 +1,55 @@
+class Solution {
+public:
+//     int findDuplicate(vector<int>& nums) {
+//         // sort(nums.begin(),nums.end());
+//         // while(nums[0]!=nums[nums[0]])
+//         // {
+//         //     swap(nums[0],nums[nums[0]]);
+//         // }
+//         // return nums[0];
+//         // for(int i=0;i<nums.size();i++)
+//         // {
+//         //     int index=abs(nums[i]);
+//         //    if(nums[i]<0)
+//         //    {
+
+//         //    }
+//         //    nums[i]*=-1;
+//         // }
+//         int slow=nums[0];
+//         int fast=nums[0];
+//         do
+//         {
+//             slow=nums[0];
+//             fast=nums[nums[0]];
+//         }
+        
+//     while(slow!=fast)
+//     {
+//         slow=nums[slow];
+//         fast=nums[fast];
+//     }
+//         return slow;
+//     }
+// };
+int findDuplicate(vector<int>& nums) {
+    int slow = nums[0];  // Initialize slow pointer to nums[0]
+    int fast = nums[0];  // Initialize fast pointer to nums[0]
+
+    // Phase 1: Find the intersection point of the two pointers
+    do {
+        slow = nums[slow];         // Move slow pointer one step ahead
+        fast = nums[nums[fast]];  // Move fast pointer two steps ahead
+    } while (slow != fast);       // Continue until slow and fast pointers meet
+
+    // Phase 2: Find the duplicate number
+    slow = nums[0];  // Reset slow pointer to nums[0]
+
+    while (slow != fast) {  // Move slow and fast pointers at the same speed until they meet
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+
+    return slow;  // Return the duplicate number
+}
+};
