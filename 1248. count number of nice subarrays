@@ -1,0 +1,60 @@
+class Solution {
+public:
+    // int numberOfSubarrays(vector<int>& nums, int k) {
+    //     long long s=0;
+ 
+    //     for(int i=0;i<nums.size();i++)
+    //     {
+    //         long long ki=0;
+    //         for(int j=i;j<nums.size();j++)
+    //         {
+    //             if(nums[j]%2!=0)
+    //             {
+    //                 ki++;
+    //             }
+    //             if(ki==k)
+    //             {
+    //                 s++;
+    //             }
+    //             if(ki>k) break;
+
+    //         }
+    //     }
+    //     return (int)s;
+        
+    // }
+    int pi(vector<int> &nums,int k)
+    {
+        if(k<0) return 0;
+        int m=0;
+        int l=0;
+        int r=0;
+        int s=0;
+        
+        while(r<nums.size())
+        {
+        if(nums[r]%2!=0)
+        {
+            s++;
+        }
+        while(s>k){
+            if(nums[l]%2!=0){
+                s--;
+            }
+            l++;
+        }
+        if(s<=k)
+        {
+        m+=r-l+1;
+        }
+        r++;
+        }
+        return m;
+    }
+    int numberOfSubarrays(vector<int>& nums, int k) {
+     int goal=pi(nums,k);
+     int goal1=pi(nums,k-1);
+     int ans=goal-goal1;
+     return ans;
+    }
+};
