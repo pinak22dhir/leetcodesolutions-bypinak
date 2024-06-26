@@ -1,0 +1,71 @@
+class Solution {
+public:
+int pi(vector<int>& nums, int goal)
+{
+    if(goal<0) return 0; 
+    int sum=0;
+    int l=0;
+    int r=0;
+    int m=0;
+    while(r<nums.size())
+    {
+        sum+=nums[r];
+        while(l<=r && sum>goal)
+        {
+            sum-=nums[l];
+            l++;
+        }
+        if(sum<=goal)
+        {
+            m+=r-l+1;
+        }
+        r++;
+         }
+         return m;
+}
+   
+ int goal1=pi(nums,goal);
+ int goal2=pi(nums,goal-1);
+int ans=goal1-goal2;
+  return ans;
+    }
+};
+//alternate solutions
+// int numSubarraysWithSum(vector<int>& nums, int goal) {
+    //     int m=0;
+    //   for(int i=0;i<nums.size();i++)
+    //   {
+    //     int sum=0;
+    //     for(int j=i;j<nums.size();j++)
+    //     {
+    //         sum+=nums[j];
+    //         if(sum==goal)
+    //         {
+    //             m++;
+    //         } 
+    //        if(sum>goal)
+    //         {
+    //             break;
+    //         }      
+    //      }
+    //   }
+    //     return m;
+    // }
+    // unordered_map<int,int> mp;
+    // int m=0;
+    // int sum=0;
+    // mp[0]=1;
+    //   for(int i=0;i<nums.size();i++)
+    //   {
+    //    sum+=nums[i]; 
+    //             int k=sum-goal;
+    //             if(mp.find(k)!=mp.end())
+    //             {
+    //                 m+=mp[sum-goal];
+    //             }
+    //         mp[sum]++;
+                
+    //      }
+
+    //     return m;
+    // }
