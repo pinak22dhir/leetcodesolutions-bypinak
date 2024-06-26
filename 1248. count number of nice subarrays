@@ -1,5 +1,6 @@
 class Solution {
 public:
+#brute time complexity ->0(n**2)  space 0(n)
     // int numberOfSubarrays(vector<int>& nums, int k) {
     //     long long s=0;
  
@@ -23,6 +24,7 @@ public:
     //     return (int)s;
         
     // }
+//tc o(n) sc 0(1)
     int pi(vector<int> &nums,int k)
     {
         if(k<0) return 0;
