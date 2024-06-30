@@ -1,0 +1,28 @@
+class Solution {
+public:
+void helper(vector<int> nums,int index,set<vector<int>> &pi,vector<int> ds)
+{
+    if(index==nums.size()) {
+        sort(ds.begin(),ds.end());
+         pi.insert(ds);
+        return;
+    }
+    ds.push_back(nums[index]);
+    helper(nums,index+1,pi,ds);
+    ds.pop_back();
+    helper(nums,index+1,pi,ds);
+    return;
+
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        set<vector<int>> pi;
+        vector<int> ds;
+        helper(nums,0,pi,ds);
+        vector<vector<int>> pin;
+        for(auto it:pi)
+        {
+            pin.push_back(it);
+        }
+        return pin;
+    }
+};
