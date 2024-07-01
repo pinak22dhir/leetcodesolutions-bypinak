@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void helper(vector<int> &nums, 
+    vector<vector<int>>& pi, vector<int> ds,unordered_map<int,int>freq) {
+        int n = nums.size();
+        if (ds.size() == n) {
+            pi.push_back(ds);
+            return;
+        }
+        for (int i = 0; i < n; ++i) {
+            if(freq[i]!=1)
+            {
+            ds.push_back(nums[i]);
+            freq[i]=1;
+            helper(nums,pi,ds,freq);
+            ds.pop_back();
+            freq[i]=0;
+            }
+               }
+    }
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> pi;
+        vector<int> ds;
+        unordered_map<int,int> mp;
+        helper(nums, pi, ds,mp);
+        return pi;
+    }
+};
