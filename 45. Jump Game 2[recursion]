@@ -1,0 +1,18 @@
+
+class Solution {
+public:
+int helper(vector<int> &nums,int index,int jumps)
+{
+    if(index>=nums.size()-1) return jumps;
+    int mini=INT_MAX;
+    for(int i=1;i<=nums[index];i++)
+{  
+    int result=helper(nums,index+i,jumps+1);
+    mini=min(mini,result);
+}
+  return mini;
+}
+    int jump(vector<int>& nums) {
+       return helper(nums,0,0);     
+    }
+};
