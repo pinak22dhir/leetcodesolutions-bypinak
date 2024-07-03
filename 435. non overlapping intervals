@@ -1,0 +1,36 @@
+struct jobs{
+    int start;
+    int end;
+};
+bool comp(jobs val1,jobs val2)
+{
+    return val1.end<val2.end;
+}
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        int c=0;
+   
+        int pin=intervals.size();
+        vector<jobs>job(pin);
+       
+        for(int i=0;i<intervals.size();i++)
+        {
+            job[i].start=intervals[i][0];
+            job[i].end=intervals[i][1];
+        }
+         sort(job.begin(),job.end(),comp);
+         int freetime=job[0].end;
+         int count=1;
+         
+         for(int i=1;i<pin;i++)
+         {
+              if(freetime<=job[i].start)
+              {
+                    count++;
+                    freetime=job[i].end;
+              }
+        }
+        return pin-count;
+    }
+};
