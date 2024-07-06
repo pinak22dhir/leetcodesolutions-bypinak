@@ -1,0 +1,40 @@
+class Solution {
+bool ispalidrome(string s,int index,int i){
+    int start=index;
+    int end=i;
+    while(start<=end)
+    {  if(s[start]!=s[end])
+         return false; 
+          else{
+           start++;
+           end--;
+    }   
+    }
+   
+    return true;
+}
+    void func( vector<vector<string>> &str,vector<string> path,string s, int index)
+    {
+      
+        if(index==s.size())
+        {
+         str.push_back(path);
+        }
+        for(int i=index;i<s.size();i++)
+        {
+            if(ispalidrome(s,index,i)){
+            path.push_back(s.substr(index,i-index+1));
+            func(str,path,s,i+1);
+            path.pop_back();
+        }
+    }
+     
+    }
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> str;
+        vector<string> path;
+        func(str,path,s,0);
+        return str;
+    }
+};
