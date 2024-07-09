@@ -1,0 +1,23 @@
+class Solution {
+public:
+    double averageWaitingTime(vector<vector<int>>& customers) {
+        double wt=0;
+        int ct=0;
+        for(int i=0;i<customers.size();i++)
+        {
+            int arrival=customers[i][0];
+            int depart=customers[i][1];
+            int pi=arrival;
+            if(arrival<=ct)
+            {
+                arrival=ct;
+            }
+            ct=depart+arrival;
+            wt+=ct-pi;
+        }
+        cout<<wt;
+        cout<<customers.size();
+        return wt/customers.size();
+        
+    }
+};
