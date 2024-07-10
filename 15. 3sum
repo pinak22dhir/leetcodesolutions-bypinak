@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> pi;
+        set<vector<int>> st;
+        for(int i=0;i<nums.size();i++)
+        {
+            unordered_map<int,int> mp;
+            for(int j=i+1;j<nums.size();j++)
+            { vector<int> triplet;
+                int target=-(nums[i]+nums[j]);
+                if(mp.find(target)!=mp.end())
+                { 
+                    triplet.push_back(nums[i]);
+                     triplet.push_back(nums[j]);
+                      triplet.push_back(target);
+                    sort(triplet.begin(), triplet.end()); 
+                    st.insert(triplet); 
+                }
+              mp[nums[j]]=j;
+           }
+      
+        }
+       for(auto it: st)
+       {
+         pi.push_back(it);
+       }
+        return pi;
+    }
+};
