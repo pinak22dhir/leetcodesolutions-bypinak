@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {  
+    unordered_map<int,int> mp;
+       int c=0;
+       int prefix=0;
+       for(int i=0;i<nums.size();i++)
+       { 
+         prefix+=nums[i];
+         if(prefix==k){ c++;}
+        int li=prefix-k;
+      if(mp.find(li)!=mp.end()){
+        int kp=mp[li];
+          c+=kp;
+      }
+       mp[prefix]++;       
+       } 
+      
+       for(auto it:mp){
+        cout<<it.first;
+       }
+       return c;
+    }
+};
