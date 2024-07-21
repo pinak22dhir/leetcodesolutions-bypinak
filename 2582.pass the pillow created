@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+        int ki=time+1;
+        int i=0;
+        bool check=true;
+        int c=0;
+        while(c<=time){
+            if(check==true){
+                i++;
+                if(i==n) check=false;
+            }
+            else{
+               i--;
+               if(i==1) check=true;
+            }
+            c++;
+        }
+    return i;
+    }
+};
