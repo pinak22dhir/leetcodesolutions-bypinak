@@ -1,0 +1,26 @@
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        int left = 0;
+        int right = 0;
+        double s = 0;
+        double m = INT_MIN; // Initialize m to a very small value
+        
+        while (right < nums.size()) {
+            s += nums[right];
+            
+            // Check if the window size reaches k
+            if (right - left + 1 == k) {
+                double mi = s / k;
+                if (mi > m) {
+                    m = mi;
+                }
+              s-=nums[left];
+              left++;
+            }
+            
+            right++;
+        }     
+        return m;
+    }
+};
