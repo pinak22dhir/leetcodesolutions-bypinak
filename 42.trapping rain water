@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int trap(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> left(n);
+        vector<int> right(n);
+        int pi=INT_MIN;
+        int si=INT_MIN;
+        for(int i=0;i<nums.size();i++)
+        {  pi=max(pi,nums[i]);
+           left[i]=pi;
+           si=max(si,nums[n-i-1]);
+           right[n-i-1]=si;
+        }
+         for(int i=0;i<nums.size();i++)
+        {  cout<<left[i]<<" ";
+        }
+        for(int i=0;i<nums.size();i++)
+        {  cout<<right[i]<<" ";
+        }
+     
+        int area=INT_MIN;
+        int ps=0;
+          for(int i=0;i<nums.size();i++)
+        {  area=min(left[i],right[i])-nums[i];
+            ps+=area;
+        }
+        return ps;
+    }
+};
