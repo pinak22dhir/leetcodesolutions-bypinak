@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int minSwaps(vector<int>& nums) {
+        int c=0;
+        for(int i=0;i<nums.size();i++)
+        {  if(nums[i]==1) c++;
+        }
+    
+        cout<<c;
+        int z=0;
+        for(int i=0;i<c;i++){
+          if(nums[i]==0) z++;
+        }
+        cout<<z;
+        
+    int pi=min(INT_MAX,z);
+    int left=0;
+    int right=c;
+    vector<int> doubli(nums.begin(),nums.end());
+    doubli.insert(doubli.end(),nums.begin(),nums.end());
+    while(right<doubli.size()){
+        if(doubli[left]==0){
+         z--;
+        }
+        if(doubli[right]==0){ z++;}      
+        pi=min(pi,z);
+        right++;
+        left++;
+    }
+    return pi;
+    }
+};
