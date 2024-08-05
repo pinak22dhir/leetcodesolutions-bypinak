@@ -1,0 +1,61 @@
+class Node{
+    public:
+string data;
+ Node* prev;
+ Node* next;
+    Node(string va)
+    { 
+    prev=NULL;
+    next=NULL;
+    data=va;
+    }
+};
+
+class BrowserHistory {
+public:
+Node* head;
+Node* temp;
+    BrowserHistory(string homepage) {
+       head=new Node(homepage); 
+       temp=head;
+    }
+    
+    void visit(string url) {
+        Node* newi=new Node(url);
+        newi->prev=temp;
+        temp->next=newi;
+        temp=newi;   
+    }
+    
+    string back(int steps) {
+        while(steps!=0)
+        {
+            if(temp->prev)
+            {
+                temp=temp->prev;
+            }
+            else{
+                break;
+            }
+            steps--;
+        }
+        return temp->data;    }
+    string forward(int steps) {
+        while(steps!=0)
+        {
+            if(temp->next)
+            {
+                temp=temp->next;
+            } else{break;}  
+        steps--;}
+    return temp->data;
+    }
+};
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
