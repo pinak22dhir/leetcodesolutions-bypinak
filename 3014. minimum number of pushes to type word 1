@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minimumPushes(string word) {
+        int n=word.size();
+        unordered_map<int,int> mp;
+        int s=0;
+        int c=0;
+        int a=2;
+        for(int i=0;i<word.size();i++)
+        { if(a>9){
+            a=2;
+        }
+          mp[a]++;
+          s+=mp[a];
+        a++;
+        }
+        return s;
+    }
+};
