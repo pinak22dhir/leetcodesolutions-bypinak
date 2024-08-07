@@ -1,0 +1,55 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string numto(int num) {
+        vector<string> one = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+        vector<string> twenty = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+        vector<string> hundred = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+        if(num == 0) {
+            return "Zero";
+        }
+        if(num < 10) {
+            return one[num];
+        }
+        if(num < 20) {
+            return twenty[num - 10];
+        }
+        if(num < 100) {
+            int ki = num % 10;
+            int pi = num / 10;
+            return hundred[pi] + (ki != 0 ? " " + one[ki] : "");
+        }
+        if(num < 1000) {
+            int ki = num / 100;
+            int pi = num % 100;
+            return one[ki] + " Hundred" + (pi != 0 ? " " + numto(pi) : "");
+        }
+        if(num < 1000000) {
+            int ki = num / 1000;
+            int pi = num % 1000;
+            return numto(ki) + " Thousand" + (pi != 0 ? " " + numto(pi) : "");
+        }
+        if(num < 1000000000) {
+            int ki = num / 1000000;
+            int pi = num % 1000000;
+            return numto(ki) + " Million" + (pi != 0 ? " " + numto(pi) : "");
+        }
+        if(num < 1000000000000) {
+            int ki = num / 1000000000;
+            int pi = num % 1000000000;
+            return numto(ki) + " Billion" + (pi != 0 ? " " + numto(pi) : "");
+        }
+
+        return ""; // for numbers larger than the defined range
+    }
+
+    string numberToWords(int num) {
+        return numto(num);
+    }
+};
+
