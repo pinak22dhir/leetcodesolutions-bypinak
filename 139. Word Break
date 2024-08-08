@@ -1,0 +1,28 @@
+bool recursion(int index,string s,unordered_map<string,bool> &mp){
+   if(index>=s.size()){
+    return true;
+   }
+   if(mp.find(s)!=mp.end()){
+    return true;
+   }
+  
+   for(int i=1;i<s.size();i++){
+    string temp=s.substr(index,i);
+     if(mp.find(temp)!=mp.end() && recursion(index+i,s,mp)){
+        return true;
+     }
+   }
+   return false;
+
+}
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_map<string,bool> ui;
+        for(int i=0;i<wordDict.size();i++){
+            ui[wordDict[i]]=true;
+        }
+       return recursion(0,s,ui);
+        
+    }
+};
