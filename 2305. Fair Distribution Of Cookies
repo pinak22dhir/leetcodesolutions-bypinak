@@ -1,0 +1,24 @@
+void recursion(int index,vector<int> &cookies,vector<int>& children,int k,int &mini){
+if(index>=cookies.size()){
+    int pi=*max_element(children.begin(),children.end());
+    mini=min(pi,mini);
+    return;}
+    int ki=cookies[index];
+    for(int i=0;i<k;i++){
+        children[i]+=ki;
+       recursion(index+1,cookies,children,k,mini);
+        children[i]-=ki;
+
+    }
+}
+
+
+class Solution {
+public:
+    int distributeCookies(vector<int>& cookies, int k) {
+        vector<int> children(k);
+        int min=INT_MAX;
+        recursion(0,cookies,children,k,min);
+        return min;   
+    }
+};
