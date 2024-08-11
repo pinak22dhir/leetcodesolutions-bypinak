@@ -1,0 +1,34 @@
+int fact(int n) {
+    if (n == 0) {
+        return 1;
+    }
+    return n * fact(n - 1);
+}
+
+string recursion(int k, vector<int> &vi, string &an) {
+    if (vi.empty()) {
+        return an;
+    }
+
+    int n = vi.size();
+    int ni = n - 1;
+    int i = k / fact(ni);
+    cout << i << " ";  // This is for debugging purposes
+    an += to_string(vi[i]);  // Convert the element at index i to a string and append it
+    vi.erase(vi.begin() + i);  // Remove the element that was just used
+    k = k % fact(ni);  // Update k for the next iteration
+    return recursion(k, vi, an);  // Recursive call
+}
+
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        vector<int> vi;
+        for (int i = 1; i <= n; i++) {
+            vi.push_back(i);
+        }
+        string an = "";
+        recursion(k - 1, vi, an);
+        return an;
+    }
+};
