@@ -1,0 +1,46 @@
+#include <vector>
+using namespace std;
+
+// DFS function using adjacency list
+void dfs(int k, vector<int> &visited, const vector<vector<int>>& adj) {
+          visited[k] = 1;
+  // Mark the current node as visited
+    for (int it : adj[k]) {
+        if (visited[it] == 0) {
+       
+            dfs(it, visited, adj); // Recursively visit all unvisited neighbors
+        }
+    }
+}
+
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& ques) {
+        int n = ques.size();
+        vector<vector<int>> adj(n);
+
+        // Build the adjacency list from the ques matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) { // Use n x n for the matrix
+                if (ques[i][j] == 1 && i != j) {
+                    adj[i].push_back(j);
+                    adj[j].push_back(i); // Since the graph is undirected
+                }
+            }
+        }
+
+        int c = 0;
+        vector<int>visited(n,0);
+
+        // Perform DFS to count the number of connected components
+        for (int i = 0; i < n; i++) {
+            if (visited[i] == 0) {
+                visited[i]=1;
+                c++;
+                dfs(i, visited, adj); // Only call DFS when encountering a new component
+            }
+        }
+
+        return c;
+    }
+};
