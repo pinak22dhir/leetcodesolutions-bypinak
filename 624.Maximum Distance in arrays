@@ -1,0 +1,26 @@
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+class Solution {
+public:
+    int maxDistance(std::vector<std::vector<int>>& arr) {
+        int n = arr.size();
+        int si = INT_MIN;
+        int min1 = *min_element(arr[0].begin(), arr[0].end());
+        int max1 = *max_element(arr[0].begin(), arr[0].end());
+      // Loop over all rows
+            for (int j =1; j < n; ++j) { // Compare row i with all other rows
+                int min2 = *min_element(arr[j].begin(), arr[j].end());
+                int max2 = *max_element(arr[j].begin(), arr[j].end());
+                
+                int ans = abs(max2 - min1);  // Max from row j minus Min from row i
+                int ans1 = abs(max1 - min2); // Max from row i minus Min from row j
+
+                si = std::max(si, std::max(ans, ans1));
+                min1=min(min2,min1);
+                max1=max(max1,max2);
+            }
+            return si;
+    }
+};
