@@ -1,0 +1,24 @@
+class Solution {
+    public int minMoves2(int[] nums) {
+        Arrays.sort(nums);
+        int s=0;
+        int e=nums.length-1;
+        int mid=s+(e-s)/2;
+        int midelem=nums[mid];
+        int c=0;
+        for(int i=0;i<=nums.length-1;i++)
+        {
+            if(nums[i]!=midelem){
+                if(nums[i]>midelem)
+                {//10 6 6 10
+                    c+=nums[i]-midelem;
+                }
+                else{
+                    c+=midelem-nums[i];
+                }
+            }
+        }
+    return c;
+        
+    }
+}
