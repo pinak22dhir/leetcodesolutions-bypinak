@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        if (s.empty()) {
+            return 0;
+        }
+
+        int maxLength = 0;
+        int k = 0;
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            count = 0;  // Reset count for each new starting point
+            int j = i;
+
+            while (j < s.length()) {
+                if (s[j] == '(') {
+                    count++;
+                } else if (s[j] == ')') {
+                    count--;
+                }
+
+                if (count < 0) {
+                    break;  // Invalid substring, stop here
+                } else if (count == 0) {
+                    maxLength = max(maxLength, j - i + 1);  // Update max length
+                }
+
+                j++;
+            }
+        }
+
+        return maxLength;
+    }
+};
