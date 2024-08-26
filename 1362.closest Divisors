@@ -1,0 +1,50 @@
+vector<int> divisors(int pi,int &mi){
+    cout<<pi<<" ";
+    int mid=pi/2;
+    vector<int>vi(2);
+    for(int i=1;i*i<=mid;i++){
+        int a=-1;
+        if(pi%i==0){
+             a=i;
+            // cout<<a<<" ";
+        }
+        int b=-1;
+        if(a!=-1){
+        if(pi%a==0){
+            b=pi/a;
+            // cout<<b<<" ";
+        }
+        }
+        if(b!=-1 ){
+            // cout<<a<<" ";
+            // cout<<b<<" ";
+        int e=a>b?abs(a-b):abs(b-a);
+        if(e<mi){
+        mi=e;
+        cout<<a<<" "<<b<<" ";
+        vi[0]=a;
+        vi[1]=b; 
+        } 
+        } 
+    }
+    return vi;
+}
+class Solution {
+public:
+    vector<int> closestDivisors(int num1) {
+        int pi=num1+1;
+        int si=num1+2;
+        int c=INT_MAX;
+        int d=INT_MAX;
+      vector<int> l1=divisors(pi,c);
+      vector<int> r1=divisors(si,d);
+      cout<<c<<" ";
+      cout<<d<<" ";
+      if(c<d){
+      return l1;  
+      }
+      else{
+        return r1;
+      }     
+    }
+};
