@@ -1,0 +1,53 @@
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int n=board.length;
+        int m=board[0].length;
+        int arr[][]=new int[n][m];
+        ans(board,arr);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+              board[i][j]=arr[i][j];
+            }
+        }
+    }
+    static void ans(int[][] board,int[][] arr){
+      for(int i=0;i<board.length;i++){
+        for(int j=0;j<board[0].length;j++){
+            if(isSafe(i,j,board)){
+               arr[i][j]=1;
+            }  
+           else{
+             arr[i][j]=0;
+            }
+        }
+      }
+    }
+   public static boolean isSafe(int p,int k,int[][] board){
+        int onec=0;
+        int zeroc=0;
+         for(int i=-1;i<=1;i++){
+             int c=i;
+                for(int j=-1;j<=1;j++){
+                    int nrow=p+c;
+                    int ncol=k+j;        
+                    if(nrow>=0 && nrow<=board.length-1 &&ncol>=0 && ncol<=board[0].length-1)        {   
+                      if(nrow==p && ncol==k){
+                        continue;
+                      }
+                       if(board[nrow][ncol]==0) {zeroc++;
+                        // System.out.print(nrow+" "+ncol+" ");
+                        }
+                        else {onec++;
+                      }
+                    }
+                }
+            }
+            if(board[p][k]==0){
+                return onec==3;
+            }
+            else if(board[p][k]==1){
+                return onec==2||onec==3;
+            }
+    return true;
+}
+}
