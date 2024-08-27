@@ -1,0 +1,45 @@
+class Solution {
+    class pair{
+        public int firs;
+        public int seco;
+        public pair(int fi,int se){
+            this.firs=fi;
+            this.seco=se;
+        }
+    }
+    public void setZeroes(int[][] matrix) {
+        // List<Integer,Integer> li=new ArrayList<ArrayList><>();
+        //     List<Integer> list=new ArrayList<>();
+        int n=matrix.length;
+        int b=matrix[0].length;
+        int booli[][]=new int[n][b];
+       Queue<pair> qu=new LinkedList<>();
+        for(int i=0;i<matrix.length;i++)
+        {
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                pair p=new pair(i,j);  
+                qu.add(p);
+                }
+            }
+        }
+         while(!qu.isEmpty()){
+            pair pis=qu.poll();
+            int ai=pis.firs;
+            int bi=pis.seco;
+            answer(booli,matrix,ai,bi);
+
+         }
+        
+    }
+    public static void answer(int[][] pi,int[][] matrix,int a,int b){
+        for(int i=0;i<matrix[0].length;i++){
+           matrix[a][i]=0;
+           pi[a][i]=1;
+        }
+        for(int i=0;i<matrix.length;i++){
+           matrix[i][b]=0;
+           pi[i][b]=1;
+        }
+    }
+}
