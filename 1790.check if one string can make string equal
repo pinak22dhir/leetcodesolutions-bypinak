@@ -1,0 +1,46 @@
+class Solution {
+    public boolean areAlmostEqual(String s1, String s2) {
+        if(s1.length()!=s2.length()){
+            return false;
+        }
+        Map<Character,Integer>mi=new HashMap<>();
+        for(int i=0;i<s1.length();i++){
+            char ch=s1.charAt(i);
+            mi.put(ch,mi.getOrDefault(ch,0)+1);
+        }
+        Map<Character,Integer>mi2=new HashMap<>();
+        for(int i=0;i<s2.length();i++){
+               char ch=s2.charAt(i);
+            mi2.put(ch,mi2.getOrDefault(ch,0)+1);
+        }
+        Set<Character> si=new HashSet<>();
+        for(int i=0;i<s1.length();i++)
+        {
+            si.add(s2.charAt(i));
+        }
+         Set<Character> si1=new HashSet<>();
+        for(int i=0;i<s2.length();i++){
+            si1.add(s2.charAt(i));
+        }
+             System.out.println(si);
+        
+        // set<char>s1(s1.begin(),)
+        int c=0;
+        int i=0;
+        int j=0;       
+
+        while(i<s1.length()&& j<s2.length()){
+            if(s1.charAt(i)!=s2.charAt(j) ){
+                if( mi2.get(s1.charAt(i)) != mi.get(s1.charAt(i)) ||mi2.get(s2.charAt(j)) != mi.get(s2.charAt(j)))
+                {  return false;}
+                  c++;
+            }
+            i++;
+            j++;  
+             }
+            // if(mi!=mi2){
+            //     return false;
+            // }
+    return c==2||c==0;
+    }
+}
