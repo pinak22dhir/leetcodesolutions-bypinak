@@ -1,0 +1,26 @@
+class Solution {
+    public boolean checkRecord(String s) {
+       int a=0;
+        for(int i=0;i<s.length();i++)
+        {
+         if(s.charAt(i)=='A')
+        {  a++;
+        }  
+    
+         if(i<=s.length()-3){
+            int j=0;
+            String p=s.substring(i,i+3);
+              for(int k=0;k<p.length();k++)
+              { if(p.charAt(k)=='L')
+              {
+                j++;             
+              }
+              if(j==3){
+                    return false;
+              }
+              }   
+        }
+    }
+        return a<2;
+    }
+}
