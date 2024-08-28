@@ -1,0 +1,12 @@
+class Solution {
+    public int findLUSlength(String a, String b) {
+        int j=0;
+        int ans=-1;
+        if(a.equals(b)){
+            return -1;
+        }
+       int pi= a.length()>b.length()?a.length():b.length();
+        return pi;
+        
+    }
+}
