@@ -1,0 +1,26 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int[] freq = new int[26];  // Frequency array for 26 letters
+        int l = 0, r = 0;          // Left and right pointers for the window
+        int maxf = 0;              // Max frequency of any character in the current window
+        int result = 0;            // Variable to store the result (maximum length)
+
+        while (r < s.length()) {
+            freq[s.charAt(r) - 'A']++;    // Increment the frequency of the current character
+            maxf = Math.max(maxf, freq[s.charAt(r) - 'A']);  // Update the max frequency
+
+            // Check if the current window is valid
+            if ((r - l + 1) - maxf > k) {
+                // If the window is invalid, shrink it from the left
+                freq[s.charAt(l) - 'A']--;
+                l++;
+            }
+
+            // Update the result with the maximum window size
+            result = Math.max(result, r - l + 1);
+            r++;
+        }
+
+        return result;  // Return the maximum length found
+    }
+}
