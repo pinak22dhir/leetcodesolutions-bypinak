@@ -1,0 +1,25 @@
+class Solution {
+    public String reverseWords(String s) {
+        int n=s.length();
+       int j=s.length()-1;
+
+        String p="";
+   
+        for(int i=0;i<s.length();i++){
+                 String k="";
+            if(i<n && s.charAt(i)==' '){
+                continue;
+            }
+
+                while(i<n && s.charAt(i)!=' '){
+                    k+=s.charAt(i);            
+                    i++;
+                }
+            if(!k.isEmpty()){
+                p=k+" "+p;
+            }  
+        }
+     
+        return p.substring(0,p.length()-1);
+}
+}
