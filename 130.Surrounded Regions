@@ -1,0 +1,77 @@
+class Solution {
+    class Pair{
+        int fi;
+        int sec;
+        Pair(int f,int s)
+        {
+            this.fi=f;
+            this.sec=s;
+        }
+    }
+    public void solve(char[][] board) {
+        Queue<Pair>qu=new LinkedList<>();
+        Queue<Pair>qi=new LinkedList<>();
+        int n=board.length;
+        int m=board[0].length;
+        int [][] visited=new int[n][m];
+       
+        for(int l=0;l<n;l++)
+        {
+            for(int p=0;p<m;p++){
+            if(l==0||l==n-1|| p==0|| p==m-1){
+            if(board[l][p]=='O' && visited[l][p]==0){
+                visited[l][p]=1;
+                qi.add(new Pair(l,p));
+                while(!qi.isEmpty())
+                { Pair top=qi.poll();
+                 int row[]={-1,1,0,0};
+                 int col[]={0,0,-1,1};
+                    for(int i=0;i<4;i++){
+                         int nr=row[i]+top.fi;
+                         int nc=col[i]+top.sec;
+                         if(nr>=0 && nr<=n-1 && nc>=0 && nc<=m-1)
+                         {
+                         if( board[nr][nc]=='O' && visited[nr][nc]==0)
+                         {  visited[nr][nc]=1;
+                        //   board[nr][nc]='X';
+                        qi.add(new Pair(nr,nc));
+                         }
+                         }
+                    }
+                }
+            }
+        }
+     }
+ }
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(board[i][j]=='O' &&  visited[i][j]==0)
+                {
+                   board[i][j]='X';
+                   Pair p=new Pair(i,j);
+                   qu.add(p);
+                   while(!qu.isEmpty())
+                   { Pair pi=qu.poll();
+                        int row[]={-1,-1,0,0};
+                        int col[]={0,0,-1,1};
+                        for(int ki=0;ki<4;ki++)
+                        {
+                            int nrow=row[ki]+pi.fi;
+                            int ncol=col[ki]+pi.sec;
+                            if(nrow>=0 && ncol<=m-1 && nrow<=n-1 && ncol>=0 && board[nrow][ncol]=='X' && visited[nrow][ncol]==0){
+                                visited[nrow][ncol]=1;
+                                board[nrow][ncol]='X';
+                                qu.add(new Pair(nrow,ncol));
+
+                            }
+                        }
+                   }
+                }
+            }
+        }
+
+        
+    }
+}
