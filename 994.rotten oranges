@@ -1,0 +1,74 @@
+class Solution {
+  static  class Pair{
+        int fi;
+        int se;
+        int thir;
+        Pair(int first,int second,int thi)
+        {
+            this.fi=first;
+            this.se=second;
+            this.thir=thi;
+        }
+    }
+    public int orangesRotting(int[][] grid) {
+        Queue<Pair>qu=new LinkedList<>();
+        int n=grid.length;
+        int m=grid[0].length;
+        int visited[][]=new int[n][m];
+        int c=0;
+     for(int i=0;i<grid.length;i++)
+     {
+        for(int j=0;j<grid[0].length;j++)
+        {
+            if(grid[i][j]==2){
+                Pair p=new Pair(i,j,0);
+                qu.add(p);
+                visited[i][j]=1;
+                c++;
+            }
+             if(grid[i][j]==0){
+                visited[i][j]=1;
+                c++;
+            }
+        }
+     }
+    //  while(!qu.isEmpty()){
+    //     Pair pi=qu.poll();
+    //     System.out.print(pi.fi+" "+pi.se+" "+pi.thir+" ");
+    //  }
+    int pi=0;
+     while(!qu.isEmpty()){
+        Pair top=qu.poll();
+        int first=top.fi;
+        int sec=top.se;
+        int third=top.thir;
+        pi=third;
+
+        int row[]={-1,1,0,0};
+        int col[]={0,0,-1,+1};
+  
+        for(int i=0;i<4;i++){
+            int nr=first+row[i];
+            int nc=sec+col[i];
+            int nt=third+1;
+            if(nr>=0 && nr<=grid.length-1 && nc>=0 && nc<=grid[0].length-1 && visited[nr][nc]==0 && grid[nr][nc]==1)
+            {
+                visited[nr][nc]=1;
+                qu.add(new Pair(nr,nc,nt));
+                c++;
+
+            }
+        }
+     }
+    
+    System.out.println(c+" ");
+   
+     if(c==n*m)
+     {
+        return pi;
+     }
+     else{
+        return -1;
+     } 
+    }
+}
