@@ -1,0 +1,22 @@
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        int n1=str1.length();
+        int n2=str2.length();
+        String p="";
+        if(((str1+str2).equals(str2+str1))){
+            p=str1.substring(0,gcd(n1,n2));
+        }
+        return p;
+    }
+    public static int gcd(int a,int b){
+        int min=a>b?b:a;
+        int hcf=-1;
+        for(int i=min;i>=0;i--){
+            if(a%i==0 && b%i==0){
+                hcf=i; 
+                break;
+            }
+        }
+        return hcf;
+    }
+}
