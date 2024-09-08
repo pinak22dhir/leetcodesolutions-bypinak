@@ -1,0 +1,65 @@
+class Solution {
+  static  class Pair{
+        int s;
+        int d;
+        int t;
+        Pair(int f,int s,int p){
+         this.s=f;
+         this.d=s;
+         this.t=p;
+        }
+    }
+    static class Pairr{
+        int x;
+        int y;
+     Pairr(int x,int y){
+         this.x=x;
+         this.y=y;
+        }
+    }
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        Queue<Pair> qu=new LinkedList<>();
+        qu.add(new Pair(0,0,src));
+        int visited[]=new int[n];
+
+        Arrays.fill(visited,Integer.MAX_VALUE);
+
+        visited[src]=0;
+
+        ArrayList<ArrayList<Pairr>> li=new ArrayList<>();
+
+        for(int i=0;i<n;i++)
+        {
+            li.add(new ArrayList<>());
+        }
+
+         for(int[] e:flights){
+            int a=e[0];
+            int b=e[1];
+            int c=e[2];
+            li.get(a).add(new Pairr(b,c));
+         }
+           int j=k+1;
+        while(!qu.isEmpty())
+        {
+            Pair p=qu.poll();
+            int a=p.s;
+            int b=p.d;
+            int c=p.t;
+            for(Pairr l:li.get(c)){
+              int e=l.x;
+              int f=l.y;
+              if(a<j && b+f<visited[e])
+              {
+                visited[e]=b+f;
+               qu.add(new Pair(a+1,visited[e],e));
+              }
+            }
+        }
+        for(int z=0;z<n;z++)
+        {
+            System.out.println(visited[z]+" ");
+        }
+        return visited[dst]==Integer.MAX_VALUE?-1:visited[dst];
+    }
+}
