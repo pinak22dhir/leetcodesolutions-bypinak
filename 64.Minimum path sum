@@ -1,0 +1,36 @@
+class Solution {
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] dp=new int[m][n];
+        return recu(grid, 0, 0, m, n,dp);
+    }
+
+    
+    public int recu(int[][] grid,int i, int j, int m, int n,int[][] dp) { 
+       
+        if (i == m -1&& j == n - 1) {
+            dp[i][j]=grid[i][j]; 
+            return dp[i][j]; 
+        }
+        
+        int down = Integer.MAX_VALUE;
+        int right = Integer.MAX_VALUE;
+        if(dp[i][j]!=0){
+            return dp[i][j];
+        }
+    
+        if (i < m - 1) {
+            down = recu(grid, i + 1, j, m, n,dp);
+        
+     
+        if (j < n - 1) {
+            right = recu(grid,i, j + 1, m, n,dp);      
+        }
+       
+        dp[i][j]=Math.min(right,down)+grid[i][j];
+        return dp[i][j];
+    }
+}
+
+      
