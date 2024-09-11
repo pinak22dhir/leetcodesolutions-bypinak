@@ -1,0 +1,56 @@
+class Solution {
+    public int minBitFlips(int start, int goal) {
+        String ki=bits(start);
+        String ai=bits(goal); 
+        int i=0;
+        int j=0;
+        int c=0;
+    System.out.println(ki);   
+     System.out.println(ai);
+     
+        if(ki.length()>ai.length()){
+            int l=0;
+            int k=ki.length()-ai.length();
+            while(l!=k){
+                ai+='0';
+                l++;
+            }
+        }
+         if(ki.length()<ai.length()){
+            int l=0;
+            int k=ai.length()-ki.length();
+            while(l!=k){
+                ki+='0';
+                l++;
+            }
+        }
+        while(i<ki.length() && j<ai.length()){
+            if(ki.charAt(i)!=ai.charAt(j))
+            {
+                c++;
+            }
+            i++;j++;
+        }
+     System.out.println(ki);   
+     System.out.println(ai);
+       
+        return c;
+    }
+    public String bits(int a)
+    { String p="";
+        while(a!=0)
+        {
+           int pi=a%2;
+           if(pi==0){
+            p+='0';
+           }
+           else{
+            p+='1';
+           }
+            a=a/2;
+        }
+       
+        return p;
+    }
+   
+}
