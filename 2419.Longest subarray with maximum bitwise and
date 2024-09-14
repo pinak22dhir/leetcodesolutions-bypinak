@@ -1,0 +1,28 @@
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int a = Integer.MIN_VALUE;
+        int longest = Integer.MIN_VALUE;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (a < nums[i]) {
+                a = nums[i];
+            }
+        }
+
+        // Find the longest contiguous subarray where all elements are the maximum value
+        for (int i = 0; i < nums.length; i++) {
+            if (a == nums[i]) {
+                int j = i;
+                while (j < nums.length && a == nums[j]) {
+                    j++; 
+                }
+                count = j - i;
+                i+=(j-i);
+            }
+            longest = Math.max(count, longest);
+
+        }
+
+        return longest;
+    }
+}
