@@ -1,0 +1,43 @@
+class Solution {
+    public int compress(char[] chars) {
+        if(chars.length==0){
+            return 0;
+        }
+        char ans=chars[0];
+        int j=1;
+         int count=0;
+       for(int i=0;i<chars.length;i++)
+       {
+         if(ans==chars[i]){
+            count++;
+         }
+         else{ 
+            if(count!=1)
+            {  String counti=String.format("%d",count);
+                for(char t:counti.toCharArray()){
+                    chars[j++]=t;
+                }
+            }
+            ans=chars[i];
+            chars[j]=ans;
+            j++;
+            count=1;
+         }
+       }
+       if(count!=1)
+            {  String counti=String.format("%d",count);
+                 int s=0;
+                 char coun[]=counti.toCharArray();
+                 while(s<coun.length){
+                    chars[j++]=coun[s++];
+                 }
+                //   for(char t:counti.toCharArray()){
+                //     chars[j++]=t;
+                // }
+              
+            }
+       
+           
+       return j;
+    }
+}
