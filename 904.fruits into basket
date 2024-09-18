@@ -1,0 +1,36 @@
+class Solution {
+    public int totalFruit(int[] fruits) {
+      int i=0;
+      int j=0;
+      int k=2;
+      int c=0;
+      int mi=0;
+      Map<Integer,Integer> mp=new HashMap<>();
+      while(j<fruits.length){
+       if(!mp.containsKey(fruits[j]))
+       {
+           c++;
+       }
+       mp.put(fruits[j],mp.getOrDefault(fruits[j],0)+1);
+       while(c> k){
+       int d= mp.get(fruits[i]);
+       mp.put(fruits[i],d-1);
+        if(mp.get(fruits[i])==0){
+            mp.remove(fruits[i]);
+            c--;
+        }
+        i++;
+       }
+
+        if(c<=k)
+        { int sum=0;
+         for(int a:mp.values()){
+             sum+=a;
+         }
+          mi=Math.max(mi,sum);
+        }
+        j++;
+      }
+     return mi;
+    }
+}
