@@ -1,0 +1,42 @@
+class Solution {
+    public String discountPrices(String sentence, int discount) {
+        String[] arr = sentence.split("\\s+"); 
+        StringBuilder p = new StringBuilder(); 
+        Set<String> set=new HashSet<>();
+         set.add("$");
+         set.add("$1e5");
+        for (String si : arr) {
+            String word = si;
+       
+            if(word.charAt(0)=='$' && !set.contains(word)){
+                 if(safe(word)){
+                    String a=word.substring(1);
+                    Long ans=Long.parseLong(a);
+                    double di=ans-(ans*(discount/100.0));
+                    String formated="$"+String.format("%.2f",di);
+                     p.append(formated+" ");
+                     }
+                else{
+                  p.append(word+" ");
+                }
+            }
+            else{
+                 p.append(word+" ");
+            }
+ 
+    }
+   
+        return p.toString().trim();
+    }
+    static boolean safe(String a){
+
+        for(int i=1;i<a.length();i++)
+        {
+           char to=a.charAt(i);
+            if(!Character.isDigit(to)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
