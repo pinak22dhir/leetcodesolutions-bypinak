@@ -1,0 +1,30 @@
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        Stack<Integer> si=new Stack<>();
+        StringBuilder st=new StringBuilder(s);
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='('){
+                si.add(i);
+            }
+            else if(s.charAt(i)==')'){
+                if(!si.isEmpty()){
+                    si.pop();
+                }
+                else {
+                    st.setCharAt(i,'_');
+                }
+            }
+        }
+            while(!si.isEmpty()){
+                int a=si.pop();
+                st.setCharAt(a,'_');
+            }
+            StringBuilder result=new StringBuilder();
+          for(char c:st.toString().toCharArray()){
+            if(c!='_'){
+                result.append(c);
+            }
+          }
+        return result.toString();
+    }
+}
