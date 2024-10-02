@@ -1,0 +1,26 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        int i=0;
+        int maxi=0;
+        int j=0;
+        int c=0;
+        while(j<s.length()){
+             while(j-i+1>k){
+                if(vowels(s.charAt(i))){
+                    c--;
+                }  
+                i++;  
+            }
+            if(vowels(s.charAt(j)))
+            { 
+                c++;
+            }
+            maxi=Math.max(maxi,c);
+            j++;
+        }
+        return maxi;
+    }
+    public static boolean vowels(char a){
+        return a=='a'||a=='e'||a=='o'||a=='i'||a=='u';
+    }
+    }
