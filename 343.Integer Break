@@ -1,0 +1,36 @@
+class Solution {
+    public int integerBreak(int n) {
+        if (n == 2) {
+            return 1;
+        }
+        if (n == 3) {
+            return 2;
+        }
+        
+        int[] p = new int[1]; 
+  
+        int pi=1; 
+        int dp[]=new int[n+1];
+        Arrays.fill(dp,-1);
+        return rec(n, p,pi,dp);
+    }
+
+    int rec(int k, int[] product,int pi,int dp[]) {
+        if (k == 0) {
+            product[0]=pi;
+            dp[0]=pi;
+            System.out.print(pi);
+            return product[0]; 
+        }
+        if (k < 0) {
+            return 0; 
+        }
+        
+        if(dp[k]!=-1){
+            return dp[k];
+        }
+        int tempProduct3 = rec(k - 3, product,pi*3,dp);
+        int tempProduct2 = rec(k - 2, product,pi*2,dp); 
+       return dp[k]=Math.max(product[0],Math.max(tempProduct3,tempProduct2)); 
+    }
+}
