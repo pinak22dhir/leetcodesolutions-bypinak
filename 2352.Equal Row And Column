@@ -1,0 +1,31 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+        int a=0;
+       Map<String,Integer> si=new HashMap<>();
+        for(int i=0;i<n;i++){
+            String p="";
+            for(int j=0;j<m;j++){
+                p+=grid[i][j];
+                p+='-';
+            }
+            si.put(p,si.getOrDefault(p,0)+1);
+        }
+
+        int c=0;
+        for(int i=0;i<m;i++){
+            String p="";
+            for(int j=0;j<n;j++){
+                p+=grid[j][i];
+                p+='-';
+            }
+             if(si.containsKey(p)){
+   
+                    c+=si.get(p);
+                }
+        }
+        return c;
+
+    }
+}
