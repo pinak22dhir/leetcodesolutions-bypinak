@@ -1,0 +1,39 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+          if(word1.length()!=word2.length()){
+            return false;
+        }
+        Set<Character> si=new HashSet<>();
+         Set<Character> si2=new HashSet<>();
+        for(int i=0;i<word1.length();i++)
+        {
+        si.add(word1.charAt(i));
+        si2.add(word2.charAt(i));
+        }
+        System.out.print(si);
+        System.out.print(si2);
+
+
+        int freq[]=new int[26];
+        int freq2[]=new int[26];
+        for(int i=0;i<word1.length();i++){
+          freq[word1.charAt(i)-'a']++;
+          freq2[word2.charAt(i)-'a']++;
+        }
+        Arrays.sort(freq);
+        Arrays.sort(freq2);
+        if(!Arrays.equals(freq,freq2)){
+            return false;
+        }
+        
+
+        for(int i=0;i<word1.length();i++)
+        { if(word1.charAt(i)!=word2.charAt(i)){
+            if(!si.contains(word2.charAt(i))||!si2.contains(word1.charAt(i))){
+                return false;
+            }
+           } 
+        }
+        return true;
+    }
+}
