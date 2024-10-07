@@ -1,0 +1,58 @@
+class Pair{
+    TreeNode f;
+    int s;
+    int c;
+    Pair(TreeNode a,int b,int c){
+        this.f=a;
+        this.s=b;
+        this.c=c;
+    }
+ }
+ class Pair2{
+    int s;
+    int c;
+    Pair2(int b,int c){
+        this.s=b;
+        this.c=c;
+    }
+ }
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        Queue<Pair>qu=new LinkedList<>();
+        qu.offer(new Pair(root,0,0));
+        TreeMap<Integer,PriorityQueue<Pair>> map=new TreeMap<>();
+        while(!qu.isEmpty()){
+            Pair pa=qu.poll();
+            TreeNode d=pa.f;
+            int order=pa.s;
+            int level=pa.c;
+            if(!map.containsKey(order)){
+              map.put(order,new PriorityQueue<>((a,b)->{
+                if(a.c==b.c){
+                    return Integer.compare(a.f.val,b.f.val);
+                }
+                else{
+                  return Integer.compare(a.c,b.c);
+                }
+              }));
+            }
+            map.get(order).add(new Pair(d,order,level));
+            if(d.left!=null){
+                qu.add(new Pair(d.left,order-1,level+1));
+            }
+            if(d.right!=null){
+                qu.add(new Pair(d.right,order+1,level+1));
+            }
+        }
+        List<List<Integer>> ai=new ArrayList<>();
+        for(PriorityQueue<Pair> pi:map.values()){
+            List<Integer>ls=new ArrayList<>();
+            while(!pi.isEmpty()){
+                ls.add(pi.poll().f.val);
+            }
+            ai.add(ls);
+        }
+    return ai;     
+    }
+}
+             
