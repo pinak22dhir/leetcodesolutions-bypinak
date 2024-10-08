@@ -1,0 +1,24 @@
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+     Map<Integer,Integer> mp=new HashMap<>();
+     for(int i=0;i<inorder.length;i++){
+        mp.put(inorder[i],i);
+     }
+        return rec(preorder,inorder,0,inorder.length-1,0,preorder.length-1,mp);
+        
+    }
+    static TreeNode rec(int[] preorder,int[] inorder,int inos,int ine,int pres,int pree,Map<Integer,Integer> mp){
+        if(pres>=pree||inos>=ine){
+            return null;
+        }
+        TreeNode root=new TreeNode(preorder[pres]);
+        int find=mp.get(root.val);
+        int l=find-inos+1;
+        root.left=rec(preorder,inorder,inos,find-1,pres+1,pres+l,mp);
+        root.right=rec(preorder,inorder,find+1,ine,pres+l+1,pree,mp);
+        return root;
+
+
+    }
+}
+  
