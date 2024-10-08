@@ -1,0 +1,19 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String>st=new ArrayList<>();
+        rec(n,st,0,0,"");
+        return st;
+    }
+    static void rec(int n,List<String>li,int i,int j,String p){
+        if(j==i && i==n){
+            li.add(p);
+            return;
+        }
+       if(i<n){ 
+        rec(n,li,i+1,j,p+'(');
+       }
+       if(j<i){
+        rec(n,li,i,j+1,p+')');
+       }
+    }
+}
