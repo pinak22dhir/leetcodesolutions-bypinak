@@ -1,0 +1,30 @@
+public class Solution {
+    public static ArrayList<Integer> pathInATree(TreeNode root, int x) {
+        // Write your code here..
+        ArrayList<Integer> li=new ArrayList<>();
+       
+               if(rec(root,x,li)==true){
+                   return li;
+               }
+               return li;
+           
+        
+    }
+    static boolean rec(TreeNode root,int x,ArrayList<Integer> li){
+        if(root==null){
+            return false;
+        }
+        li.add(root.data);
+        if(root.data==x){
+         return true;
+
+        }
+
+       if(rec(root.left,x,li)||rec(root.right,x,li)){
+           return true;
+       }
+       
+       li.remove(li.size()-1);
+      return false;
+    }
+}
