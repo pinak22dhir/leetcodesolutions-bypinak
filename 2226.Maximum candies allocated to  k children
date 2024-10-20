@@ -1,0 +1,36 @@
+class Solution {
+    public int maximumCandies(int[] candies, long k) {
+
+        int left = 1;
+        int right = 0; 
+
+        for (int candy : candies) {
+            right = Math.max(right, candy);
+        }
+        return rec(candies, k, left, right);
+    }
+
+    int rec(int[] candies, long k, int l, int h) {
+        if (l > h) {
+            return 0; 
+        }
+
+        int mid = l + (h - l) / 2;
+        int result = -1; 
+        if (possible(candies, k, mid)) {
+            result = mid;
+            int ki = rec(candies, k, mid + 1, h);
+            return ki != 0 ? ki : result; 
+        } else {
+            return rec(candies, k, l, mid - 1); 
+        }
+    }
+
+    boolean possible(int candies[], long childCount, int maxvalue) {
+        long count = 0; // Use long to avoid overflow
+        for (int candy : candies) {
+            count += candy / maxvalue; // Count how many children can be served
+        }
+        return count >= childCount; // Check if we can serve at least k children
+    }
+}
