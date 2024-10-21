@@ -1,0 +1,23 @@
+class Solution {
+    public int maxUniqueSplit(String s) {
+        int ans[]=new int[1];
+        Set<String> st=new HashSet<>();
+        rec(ans,s,0,st);
+        return ans[0];
+        
+    }
+    static int rec(int ans[],String s,int a,Set<String> st){
+        if(a==s.length()){
+            ans[0]=Math.max(st.size(),ans[0]);
+        }
+        for(int i=a;i<s.length();i++){
+            String b=s.substring(a,i+1);
+            if(!st.contains(b)){
+               st.add(b);
+               rec(ans,s,i+1,st);
+               st.remove(b);
+            }
+        }
+        return ans[0];
+    }
+}
