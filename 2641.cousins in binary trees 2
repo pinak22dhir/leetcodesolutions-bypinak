@@ -1,0 +1,71 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode replaceValueInTree(TreeNode root) {
+        ArrayList<Integer> li=new ArrayList<>();
+        Queue<TreeNode>qu=new LinkedList<>();
+        qu.offer(root);
+        while(!qu.isEmpty()){
+            int a=qu.size();
+            int sum=0;
+           while(a!=0){
+            TreeNode top=qu.poll();
+            if(top.left!=null){
+                qu.add(top.left);
+                sum+=top.left.val;
+            }
+            if(top.right!=null){
+                qu.add(top.right);
+                sum+=top.right.val;
+            }
+            a--;
+           }
+            li.add(sum);
+        }
+        System.out.println(li);
+        qu=new LinkedList<>();
+         qu.offer(root);
+         root.val=0;
+         int i=0;
+        while(!qu.isEmpty()){
+            int a=qu.size();
+           while(a!=0){
+            int sum=0;
+            TreeNode top=qu.poll();
+            System.out.println(top.val);
+            if(top.left!=null){
+                qu.add(top.left);
+                sum+=top.left.val;
+            }
+            if(top.right!=null){
+                qu.add(top.right);
+                sum+=top.right.val;
+            }
+            int target=li.get(i)-sum;
+            if(top.left!=null){
+                top.left.val=target;
+            }
+            if(top.right!=null){
+                top.right.val=target;
+            }
+            a--;
+         }
+
+         i++;
+        }
+        return root;
+    }
+}
