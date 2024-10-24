@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+       if(ans(root1,root2)==true){
+           return true;
+       } 
+       return false;
+    }
+    static boolean ans(TreeNode t1,TreeNode t2){
+   
+   if(t1==null||t2==null){
+        return t1==t2;
+    }
+   if(t1.val!=t2.val){
+    return false;
+   }
+  
+   return (ans(t1.left, t2.left) && ans(t1.right, t2.right)) || 
+               (ans(t1.left, t2.right) && ans(t1.right, t2.left));
+    }
+
+    static String reverse(String c){
+      char ch[]=c.toCharArray();
+      Arrays.sort(ch);
+      return new String(ch);
+    }
+}
