@@ -1,0 +1,21 @@
+class Solution {
+    public int longestSquareStreak(int[] nums) {
+        Integer[] integerArray = Arrays.stream(nums).boxed().toArray(Integer[]::new);
+        Arrays.sort(integerArray, (a, b) -> Integer.compare(b, a));
+        Map<Integer,Integer>mp=new HashMap<>();
+        int maxcount=0;
+        for(int i=0;i<integerArray.length;i++){
+            int value=(int)integerArray[i]*integerArray[i];
+            int newvalue=1;
+            if(mp.containsKey(value)){
+                 newvalue=mp.get(value)+1;
+            }
+            else{
+                newvalue=1;
+            }
+            mp.put(integerArray[i],newvalue);
+            maxcount=Math.max(maxcount,newvalue);
+        }        System.out.println(Arrays.toString(integerArray));
+            return maxcount==1?-1:maxcount;
+    }
+}
