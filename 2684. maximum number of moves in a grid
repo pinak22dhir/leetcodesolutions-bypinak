@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Solution {
+    public int maxMoves(int[][] grid) {
+        int maxCount = 0;
+        int n = grid.length;
+        int m = grid[0].length;
+
+        // Memoization array
+        int[][] memo = new int[n][m];
+
+        
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            maxCount = Math.max(maxCount, helper(i, 0, grid, memo,0, Integer.MIN_VALUE));
+        }
+        return maxCount;
+    }
+
+    static int helper(int i, int j, int[][] grid, int[][] memo,int c, int prevValue) {
+    
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] <= prevValue) {
+            return Integer.MIN_VALUE;
+        }
+
+       
+        if (memo[i][j] != -1) {
+            return memo[i][j];
+        }
+
+        int currentValue = grid[i][j];
+        int maxMoves =1;
+        maxMoves = Math.max(maxMoves, helper(i - 1, j + 1, grid, memo, c+1,currentValue)); // Up-right
+        maxMoves = Math.max(maxMoves, helper(i, j + 1, grid, memo, c+1,currentValue));     // Right
+        maxMoves = Math.max(maxMoves, helper(i + 1, j + 1, grid, memo, c+1,currentValue)); // Down-right
+
+        memo[i][j] = maxMoves; 
+     
+        return memo[i][j];   }
+
+}
