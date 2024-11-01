@@ -1,0 +1,23 @@
+class Solution {
+    public String makeFancyString(String s) {
+       int c=0;
+       char a=s.charAt(0);
+
+       StringBuilder p=new StringBuilder();
+       for(int i=0;i<s.length();i++){
+        if(s.charAt(i)==a && c<2) {
+            p.append(s.charAt(i));
+            c++;
+        }
+        else if(s.charAt(i)==a){
+            continue;
+        }
+        else{
+            c=1;
+            a=s.charAt(i);
+            p.append(s.charAt(i));
+        }
+       } 
+       return p.toString();
+    }
+}
