@@ -1,0 +1,21 @@
+class Solution {
+    public String compressedString(String word) {
+
+        String result="";
+        if(word.equals(" ")) return result;
+        int i=0;
+        char ch='a';
+        int c=0;
+        while(i<word.length()){
+             ch=word.charAt(i);
+             while(i<word.length() && ch==word.charAt(i) && c<9){
+                c++;
+                i++;
+             }
+             result+=c;
+             result+=ch;
+             c=0;
+        }
+        return result;
+    }
+}
