@@ -1,0 +1,21 @@
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        int n=cost.length;
+        int dp[]=new int[n+1];
+        Arrays.fill(dp,-1);
+        int left=rec(cost,0,0,dp);
+        int right=rec(cost,1,0,dp);
+        System.out.print(Arrays.toString(dp)); 
+        return Math.min(left,right);
+    }
+    static int rec(int[] cost,int i,int totalcost,int dp[]){
+        if(i==cost.length-1){
+          return cost[i];}
+        if(i>=cost.length) {return 0;}
+        if(dp[i]!=-1){return dp[i];}
+       int stepo=rec(cost,i+1,totalcost,dp);
+       int stept=rec(cost,i+2,totalcost,dp);
+       dp[i]=cost[i]+Math.min(stepo,stept);
+       return dp[i];
+    }
+}
