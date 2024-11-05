@@ -1,0 +1,20 @@
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length==0){return 0;}
+        if(nums.length==1){return nums[0];}
+        int min[]=new int[1];
+        min[0]=Integer.MIN_VALUE;
+        int n=nums.length;
+        int dp[]=new int[n];
+        Arrays.fill(dp,-1);
+        return Math.max(helper(nums,0,dp),helper(nums,1,dp));
+    }
+    static int helper(int nums[],int index,int dp[]){
+        if(index>=nums.length){ return 0;}
+        if(dp[index]!=-1){return dp[index];}
+        int take=nums[index]+helper(nums,index+2,dp);
+        int notake=helper(nums,index+1,dp);
+        dp[index]=Math.max(take,notake);
+        return dp[index];
+    }
+}
