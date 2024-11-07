@@ -1,0 +1,50 @@
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length==0){return 0;}
+        if(nums.length==1){return nums[0];}
+        int n=nums.length;
+        int arr[]=new int[n-1];
+        int arr2[]=new int[n-1];
+        int j=0;
+        int k=0;
+        for(int i=0;i<n;i++){
+            if(i!=0&& j<n-1){
+                arr[j]=nums[i];
+                j++;
+            }
+             if(i!=n-1 && k<n-1){
+                arr2[k]=nums[i];
+                k++;
+            }
+        }
+        System.out.print(Arrays.toString(arr));
+        System.out.print(Arrays.toString(arr2));
+        int max=Math.max(helper(arr),helper(arr2));
+        return max;
+    }
+    static int helper(int[] nums){
+        int n=nums.length;
+        int dp[]=new int[n];
+        Arrays.fill(dp,-1);
+        return Math.max(helper2(nums,0,dp) , helper2(nums,1,dp));
+    }
+    static int helper2(int num[],int index,int dp[]){
+        if(index>=num.length){
+            return 0;
+        }
+        int prev=0;
+        int prev2=0; 
+        for(int i=0;i<dp.length;i++){
+            int take=num[i]+prev2;
+            int nottake=prev;
+            int curr=Math.max(take,nottake);
+            prev2=prev;
+            prev=curr;
+        }
+        // if(dp[index]!=-1){return dp[index];}
+        // int take=num[index]+helper2(num,index+2,dp);
+        // int ntake=helper2(num,index+1,dp);
+        // dp[index]=Math.max(take,ntake);
+        return prev;
+    }
+}
