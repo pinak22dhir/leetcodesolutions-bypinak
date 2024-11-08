@@ -1,0 +1,20 @@
+class Solution {
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        int n=nums.length;
+        int arr[]=new int[n];
+        int xor=0;
+        for(int i=0;i<n;i++){
+            xor^=nums[i];
+        //2power n-1
+        //2  xor same sumbers mask flip 
+        int mask=((1<<maximumBit)-1);
+        int j=0;
+        for(int i=0;i<n;i++){
+            arr[j++]=xor^mask;
+            //same ko xor krna
+            xor=xor^nums[n-1-i];
+        }
+     return arr;   
+    }
+
+}
