@@ -1,0 +1,44 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        int n=coins.length;
+        int m=amount+1;
+        int dp[][]=new int[n+1][m];
+      
+        for(int i=0;i<=coins.length;i++){
+            dp[i][0]=1;
+        }
+        for(int i=1;i<dp.length;i++){
+          for(int j=1;j<dp[0].length;j++){
+            int take=0;
+            if(j>=coins[i-1]){
+             take=dp[i][j-coins[i-1]];
+            }
+              int ntake=dp[i-1][j];
+              dp[i][j]=take+ntake;
+        }
+        }
+        for(int i=1;i<dp.length;i++){
+          for(int j=1;j<dp[0].length;j++){
+            int take=0;
+            if(j>=coins[i-1]){
+             take=dp[i][j-coins[i-1]];
+            }
+              int ntake=dp[i-1][j];
+              dp[i][j]=take+ntake;
+        }
+        }
+        return dp[n][m-1];
+    }
+    static int helper(int amount,int[] coins,int index,int[][] dp){
+        if(amount==0){
+            return 1;
+        }
+        if(index>=coins.length||amount<0){
+            return 0;
+        }
+         if(dp[index][amount]!=-1){return dp[index][amount];}
+        int take=helper(amount-coins[index],coins,index,dp);
+        int nottake=helper(amount,coins,index+1,dp);
+        return dp[index][amount]=take+nottake;
+    }
+}
