@@ -1,0 +1,29 @@
+class Solution {
+    public int minFallingPathSum(int[][] grid) {
+       if (grid.length==1||grid[0].length==1){return grid[0][0];}
+        int min=Integer.MAX_VALUE;
+        int dp[][]=new int[grid.length][grid[0].length];
+        for(int rows[]:dp){
+            Arrays.fill(rows,-1);
+        }
+        for(int i=0;i<grid[0].length;i++){
+            int mini=helper(grid,0,i,dp);
+            min=Math.min(min,mini);
+        }
+        return min;
+    }
+    static int helper(int grid[][],int a,int b,int dp[][]){
+    if(a>=grid.length){  return 0;}
+    int take=0;
+    int min=Integer.MAX_VALUE;
+    if(dp[a][b]!=-1){return dp[a][b];}
+     for(int i=0;i<grid[0].length;i++){
+    if(b!=i){
+      take=grid[a][b]+helper(grid,a+1,i,dp);
+       min=Math.min(min,take);
+    }
+     }
+     dp[a][b]=min;
+     return min;
+    }
+}
