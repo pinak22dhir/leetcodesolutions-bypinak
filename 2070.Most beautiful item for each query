@@ -1,0 +1,31 @@
+class Solution {
+    public int[] maximumBeauty(int[][] items, int[] queries) {
+     Arrays.sort(items, (a, b) -> Integer.compare(a[0], b[0]));
+
+      int maxbeauty[]=new int[items.length];
+      maxbeauty[0]=items[0][1];
+      for(int i=1;i<items.length;i++){
+         maxbeauty[i]=Math.max(items[i][1],maxbeauty[i-1]);
+      }
+      int result[]=new int[queries.length];
+      for(int i=0;i<result.length;i++){
+        int c=0;
+        int l=0;
+        int r=items.length-1;
+        int value=queries[i];
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            if(items[mid][0]<=value){
+                c=maxbeauty[mid];
+                l=mid+1;
+            }
+            else{
+               r=mid-1;
+            }
+        }
+        result[i]=c;
+      }
+      return result;
+
+    }
+}
