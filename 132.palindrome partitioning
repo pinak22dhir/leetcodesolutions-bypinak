@@ -1,0 +1,41 @@
+class Solution {
+    public int minCut(String s) {
+        int dp[]=new int[s.length()];
+        Arrays.fill(dp,-1);
+    int mi=helper(0,s,0,dp)-1;
+       for(int i=0;i<dp.length;i++){
+            System.out.print(dp[i]+" ");
+        }
+    return mi;
+    }
+    static int helper(int index,String s,int c,int dp[]){
+        if(index>=s.length()){
+       return 0;
+        }
+        int min=Integer.MAX_VALUE;
+        if(dp[index]!=-1){
+            return dp[index];}
+        for(int i=index;i<s.length();i++){
+         String p=s.substring(index,i+1);
+         if(palindrome(p)){
+          int cost=1+helper(i+1,s,c,dp);
+          min=Math.min(min,cost);
+         }
+        }
+        dp[index]=min;
+       
+        return min;
+    }
+    static boolean palindrome(String s){
+        int i=0;
+        int j=s.length()-1;
+        while(i<j){
+            if(s.charAt(i)!=s.charAt(j)){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
