@@ -1,0 +1,35 @@
+class Solution {
+    static boolean helper(int x,int n,int []quantity){
+        int stores=0;
+        for(int a:quantity){
+                int value=(int)Math.ceil((double)a/x);
+                stores+=value;
+                if(stores>n){return false;}
+            }
+        return stores<=n;
+    }
+    public int minimizedMaximum(int n, int[] quantities) {
+        return binary(n,quantities);
+       
+    }
+    static int binary(int n,int quantity[]){
+        int l=1;
+        int high=0;
+        for(int i=0;i<quantity.length;i++){
+          high=Math.max(high,quantity[i]);
+        }
+         int c=0;
+         int result=high;
+        while(l<=high){
+            int mid=l+(high-l)/2;
+            if(helper(mid,n,quantity)){
+             result=mid;
+             high=mid-1;
+            }
+            else{
+             l=mid+1;
+            }
+        }
+        return result;
+    }
+}
