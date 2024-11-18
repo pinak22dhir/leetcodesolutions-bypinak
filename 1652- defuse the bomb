@@ -1,0 +1,77 @@
+1-->class Solution {
+    public int[] decrypt(int[] code, int k) {
+        int n=code.length;
+        int arr[]=new int[n];
+         function(arr,k,code);
+         return arr;
+     }
+     static void function(int[] arr,int k,int[] code){
+        int n=arr.length;
+        boolean flag=true;
+        if(k<0){
+       flag=false;
+        k=Math.abs(k);
+        }
+        int m=0;
+       for(int i=0;i<arr.length;i++){
+        if(flag==true){
+        int l=i;
+         int p=0;
+         int val=0;
+        while(p!=k){
+         l=l+1;
+        if(l==n){
+            l=0;
+        }
+         val+=code[l];
+            p++;
+         }
+         arr[m++]=val;
+        }
+       else{
+        int p=0;
+        int val=0;
+        int l=i;
+        while(p!=k){
+        l=l-1;
+        System.out.print(l);
+        if(l==-1){
+            l=n-1;
+        }
+         val+=code[l];
+        p++;
+         }
+         arr[m++]=val;
+        }
+       }
+     }
+    
+}
+
+2-->optimizedclass Solution {
+    public int[] decrypt(int[] code, int k) {
+        int n = code.length;
+        int[] arr = new int[n];
+        
+        // If k is 0, return an array of 0's as no transformation should occur
+        if (k == 0) {
+            return arr;
+        }
+        
+        // Determine the direction of traversal based on k's sign
+        int direction = (k > 0) ? 1 : -1;
+        int range = Math.abs(k);  // We only care about the magnitude of k
+        
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            // Calculate sum based on the direction and range
+            for (int j = 1; j <= range; j++) {
+                int idx = (i + j * direction + n) % n;  // Modulo to handle circular behavior
+                sum += code[idx];
+            }
+            arr[i] = sum;
+        }
+        
+        return arr;
+    }
+}
