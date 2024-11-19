@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        int i = 0;
+        int j = k - 1;
+        Set<Long> st = new HashSet<>();  // No longer needed, we can remove this Set
+        long sum = 0;
+        long max = 0;
+        Map<Integer, Integer> mp = new HashMap<>();
+        
+        // Initialize the first window
+        for (int l = 0; l < k; l++) {
+            sum += nums[l];  // Casting long back to int for indexing
+            mp.put(nums[l], mp.getOrDefault(nums[l], 0) + 1);
+        }
+
+        if (mapSecure(mp,k)) {
+            max = Math.max(sum, max);
+        }
+
+        j++;  // Move j to the next element outside of the first window
+        while (j < nums.length) {
+            sum -= nums[i];  // Subtract the element going out of the window
+            mp.put(nums[i], mp.getOrDefault(nums[i], 0) - 1);
+            if(mp.get(nums[i])==0){
+                mp.remove(nums[i]);
+            }
+            mp.put(nums[j], mp.getOrDefault(nums[j], 0) + 1);
+            sum += nums[j];  // Add the new element coming into the window
+            
+            if (mapSecure(mp,k)) {
+                max = Math.max(sum, max);
+            }
+            j++;
+            i++;
+        }
+        
+        return max;
+    }
+
+    static boolean mapSecure(Map<Integer,Integer> mp,int k) {
+      
+      return mp.size()==k;
+    }
+}
