@@ -1,0 +1,80 @@
+class Solution {
+   
+    static void dfsl(int i,int j,int grid[][]){
+        int n=grid.length;
+        int m=grid[0].length;
+
+        if(i<0||i>=n||j<0||j>=m||grid[i][j]==2||grid[i][j]==3){
+              return;
+        }
+            grid[i][j]=1;
+          dfsl(i,j-1,grid);
+    }
+      static void dfsr(int i,int j,int grid[][]){
+        int n=grid.length;
+        int m=grid[0].length;
+
+        if(i<0||i>=n||j<0||j>=m||grid[i][j]==2||grid[i][j]==3){
+              return;
+        }
+            grid[i][j]=1;
+          dfsr(i,j+1,grid);
+    }
+      static void dfsu(int i,int j,int grid[][]){
+        int n=grid.length;
+        int m=grid[0].length;
+
+        if(i<0||i>=n||j<0||j>=m||grid[i][j]==2||grid[i][j]==3){
+              return;
+        }
+            grid[i][j]=1;
+          dfsu(i-1,j,grid);
+    }
+      static void dfsd(int i,int j,int grid[][]){
+        int n=grid.length;
+        int m=grid[0].length;
+
+        if(i<0||i>=n||j<0||j>=m||grid[i][j]==2||grid[i][j]==3){
+              return;
+        }
+            grid[i][j]=1;
+          dfsd(i+1,j,grid);
+    }
+    public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
+        int grid[][]=new int[m][n];
+        int total=m*n;
+        for(int i=0;i<guards.length;i++){
+            int a=guards[i][0];
+            int b=guards[i][1];
+            grid[a][b]=2;
+        }
+        for(int i=0;i<walls.length;i++){
+            int a=walls[i][0];
+            int b=walls[i][1];
+            grid[a][b]=3;
+        }
+        int c=0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+
+                if(grid[i][j]==2){
+                   dfsd(i+1,j,grid);
+                   dfsu(i-1,j,grid);
+                   dfsl(i,j-1,grid);
+                  dfsr(i,j+1,grid);
+                }
+
+            }
+        }
+         for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+
+                if(grid[i][j]==0){
+                  c++;
+                }
+            }
+        } 
+          return c;
+        // return total-c-walls.length-guards.length;
+    }
+}
