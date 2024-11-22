@@ -1,0 +1,59 @@
+import java.util.HashMap;
+
+class Solution {
+    public int maxEqualRowsAfterFlips(int[][] matrix) {
+       
+        HashMap<String, Integer> map = new HashMap<>();
+
+        // Loop through each row in the matrix
+        for (int i = 0; i < matrix.length; i++) {
+            StringBuilder p = new StringBuilder();
+            
+            // Build the string representation of the row
+            for (int j = 0; j < matrix[0].length; j++) {
+                char a = (char) (matrix[i][j] + '0'); // Convert 0/1 to '0'/'1'
+                p.append(a);
+            }
+         
+             StringBuilder reve =complement(p.toString());
+             String rev=reve.toString();
+            map.put(p.toString(), map.getOrDefault(p.toString(), 0) + 1);// Update the count for the reversed row in the map
+
+            System.out.print(rev);
+            map.put(rev, map.getOrDefault(rev, 0) + 1);
+            System.out.println(p+"-"+rev);
+    }
+
+        // Find the maximum count in the map
+        int maxCount = 0;
+        for (int count : map.values()) {
+            System.out.println("Current Count: " + count); // Debugging the current count
+            maxCount = Math.max(maxCount, count);
+        }
+
+        // Return the maximum count found
+        return maxCount;
+    }
+    static boolean isSame(String s){
+        //0011
+        char first=s.charAt(0);
+      for(int i=1;i<s.length();i++){
+        if(s.charAt(i)!=first){
+            return false;
+        }
+      }
+      return true;
+    }
+    static StringBuilder complement(String p){
+        StringBuilder ans=new StringBuilder();
+        for(int i=0;i<p.length();i++){
+            if(p.charAt(i)=='1'){
+            ans.append('0');
+            }
+            else{
+                ans.append('1'); 
+            }
+        }
+        return ans;
+    }
+}
