@@ -1,0 +1,25 @@
+class Solution {
+    public int findChampion(int n, int[][] edges) {
+        ArrayList<Integer> li=new ArrayList<>();
+         
+         for(int i=0;i<=n-1;i++){
+          li.add(0);
+        }
+
+        for(int i=0;i<edges.length;i++){
+            li.set(edges[i][1],li.get(edges[i][1])+1);
+        }
+        for(int i=0;i<li.size();i++){
+            System.out.println(i+"99"+li.get(i));
+        }
+        int c=0;
+        int c1=-1;
+        for(int i=0;i<li.size();i++){
+            if(li.get(i)==0){
+                c++;
+                c1=i;
+            }
+        }
+      return c>1?-1:c1;
+    }
+}
