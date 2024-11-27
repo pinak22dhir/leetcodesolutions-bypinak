@@ -1,0 +1,46 @@
+class Solution {
+ static class pair{
+    int f;
+    int s;
+    pair(int f,int s){
+        this.f=f;
+        this.s=s;
+    }
+ }
+    public int[] shortestDistanceAfterQueries(int n, int[][] queries) {
+        ArrayList<ArrayList<Integer>>li=new ArrayList<>();
+
+        for(int i=0;i<n;i++){
+            li.add(new ArrayList<>());
+        }
+        for(int i=0;i<=n-2;i++){
+            li.get(i).add(i+1);
+        }
+        int[] j=new int[queries.length];
+        int s=0;
+     for(int i=0;i<queries.length;i++){
+        li.get(queries[i][0]).add(queries[i][1]);
+        j[s++]=helper(li,n);
+     }
+        return j;
+    }
+    static int helper(ArrayList<ArrayList<Integer>> li,int n){
+        PriorityQueue<pair> qu=new PriorityQueue<>((a,b)->Integer.compare(a.s,b.s));
+        qu.add(new pair(0,0));
+        int visited[]=new int[n];
+        while(!qu.isEmpty()){
+            pair top=qu.poll();
+            int node=top.f;
+            int dist=top.s;
+            if(visited[node]==1)continue;
+            visited[node]=1;
+            if(node==n-1){return dist;}
+            for(int s:li.get(node)){
+                if(visited[s]==0){
+                 qu.add(new pair(s,dist+1));
+                }
+            }
+        }
+        return 0;
+    }
+}
