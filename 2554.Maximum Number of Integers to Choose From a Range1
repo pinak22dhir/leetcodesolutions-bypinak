@@ -1,0 +1,24 @@
+class Solution {
+    public int maxCount(int[] banned, int n, int maxSum) {
+        Set<Integer>set=new HashSet<>();
+        for(int i=0;i<banned.length;i++){
+            set.add(banned[i]);
+        }
+        ArrayList<Integer>li=new ArrayList<>();
+        for(int i=1;i<=n;i++){
+           if(!set.contains(i)){
+             li.add(i);
+           }
+        }
+        Collections.sort(li);
+        int s=0;
+        int c=0;
+        for(int i=0;i<li.size();i++){
+          if(s+li.get(i)<=maxSum){
+            s+=li.get(i);
+            c++;
+          }
+        }
+        return c;
+    }
+}
