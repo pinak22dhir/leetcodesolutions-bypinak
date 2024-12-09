@@ -1,0 +1,49 @@
+class Solution {
+    public boolean[] isArraySpecial(int[] nums, int[][] queries) {       boolean ans[]=new boolean[queries.length];
+        int ans2[]=new int[nums.length];
+        int prefix[]=new int[nums.length];
+        recursion(ans2,nums);
+        for(int i=0;i<ans2.length;i++){
+            System.out.print(ans2[i]);
+        }
+        prefix[0]=ans2[0];
+        for(int i=1;i<ans2.length;i++){
+            prefix[i]=ans2[i]+prefix[i-1];
+        }
+
+        
+        // recursion(ans2,nums.length);
+        int c=0;
+    for(int i=0;i<queries.length;i++){
+            boolean flag=true;
+        int a=queries[i][0];
+        int b=queries[i][1];
+        if(a==b){
+           ans[c++]=true;
+        }
+       else  if(a>0){
+
+            int val=prefix[b-1]-prefix[a-1];
+                ans[c++]=val>=1?false:true;
+         }else{
+            int val=prefix[b-1];
+            ans[c++]=val>=1?false:true;
+         }
+    }
+        return ans;
+    }
+    static void recursion(int ans2[],int[] nums){
+        for(int i=0;i<ans2.length-1;i++){
+            if(adjacent(nums[i],nums[i+1])){
+                 ans2[i]=0;
+            }
+            else{
+                ans2[i]=1;
+            }
+        }
+        ans2[nums.length-1]=0;
+    }
+    static boolean adjacent(int a,int b){
+        return (a%2!=0 && b%2==0)||(a%2==0 && b%2!=0);
+    }
+}
