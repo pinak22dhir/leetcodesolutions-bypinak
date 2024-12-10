@@ -1,0 +1,50 @@
+class Solution {
+    public int maximumLength(String s) {
+     Map<String,Integer> mp=new HashMap<>();
+     int b=-1;
+    //    recursion(mp,s,0,"");
+       for(int i=0;i<s.length();i++){
+        for(int j=i;j<s.length();j++){
+            String t=s.substring(i,j+1);
+              mp.put(t,mp.getOrDefault(t,0)+1);
+        }
+       }
+       int size=-1;
+       int update=-1;
+    for(Map.Entry<String,Integer> map:mp.entrySet()){
+        String a=map.getKey();
+        int c=map.getValue();
+        System.out.print(a+" "+c);
+        if(isspecial(a)){
+        if(c>=3 && size<a.length()){
+            update=c;
+            size=a.length();
+        }
+        }
+    }
+ return size;
+    }
+    static boolean isspecial(String a){
+     
+        char b=a.charAt(0);
+        for(int i=1;i<a.length();i++){
+            if(a.charAt(i)!=b){
+                return false;
+            }
+        }
+        return true;
+    }
+    static void recursion(Map<String,Integer> mp,String s,int i,String p){
+        if(i==s.length()){
+            System.out.println(p);
+        if(p.trim().length()!=0){
+        mp.put(p,mp.getOrDefault(p,0)+1);
+        }
+            return ;
+        }
+       
+       recursion(mp,s,i+1,p+s.charAt(i));
+       recursion(mp,s,i+1,s.charAt(i)+"");
+
+    }
+}
