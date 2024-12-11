@@ -1,0 +1,38 @@
+class Solution {
+    class pair{
+        int a;
+        int b;
+        pair(int a,int b){
+            this.a=a;
+            this.b=b;
+        }
+
+    }
+    public int maximumBeauty(int[] nums, int k) {
+        if(nums.length==1){
+            return 1;
+        }
+        List<pair> li=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+         li.add(new pair(nums[i]-k,nums[i]+k));
+    }
+
+    Collections.sort(li,(c,d)->Integer.compare(c.a,d.a));
+    for(int s=0;s<nums.length;s++){
+    System.out.print(li.get(s).a+" "+li.get(s).b);
+   }
+    int i=0;
+    int j=i+1;
+    int max=0;
+   
+    while(j<li.size()){
+    while(i<=j &&li.get(i).b<li.get(j).a){
+        i++;
+    }
+        j++;
+    max=Math.max(max,j-i);
+    }
+
+    return max;
+    }
+}
