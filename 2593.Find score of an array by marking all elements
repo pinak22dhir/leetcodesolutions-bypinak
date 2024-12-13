@@ -1,0 +1,38 @@
+class Solution {
+    static class pair{
+        int a;
+        int b;
+        pair(int a,int b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+    public long findScore(int[] nums) {
+ 
+    PriorityQueue<pair>pq=new PriorityQueue<>((c,d)->{int cmp=Integer.compare(c.a,d.a);
+    return (cmp!=0)?cmp:Integer.compare(c.b,d.b);
+    });
+    int visited[]=new int[nums.length];
+   
+    for(int i=0;i<nums.length;i++){
+        pq.add(new pair(nums[i],i));
+    }
+    long sum=0;
+    int c=1;
+    while(!pq.isEmpty() ){
+        pair p=pq.poll();
+        if(visited[p.b]==1){
+            continue;
+        }
+        sum+=p.a;
+        visited[p.b]=1;
+        if(p.b-1>=0 ){
+            visited[p.b-1]=1;
+        }
+        if(p.b+1<nums.length && visited[p.b+1]!=1){
+            visited[p.b+1]=1;
+        }   
+    }
+       return sum;
+    }
+}
