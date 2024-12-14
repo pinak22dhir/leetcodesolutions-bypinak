@@ -1,0 +1,36 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+    int s=0;
+    int m=0;
+    for(int i=0;i<piles.length;i++){
+       m=Math.max(m,piles[i]);
+       s+=piles[i];
+    }  Arrays.sort(piles);
+       int ans=binary(piles,1,m,h,s);
+       return ans;
+    }
+    static int binary(int piles[],int s,int m,int h,int sum){
+        int l=s;
+        int r=m;
+        int si=-1;
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            if(all(mid,piles,h,sum)){
+               si=mid;
+               System.out.print(si);
+                r=mid-1;         }
+            else{
+            l=mid+1;
+            }
+        }
+        return si;
+    }
+    static boolean all(int mid,int piles[],int h,int sum){
+       int hours = 0;
+        for (int pile : piles) {
+            hours += (int)Math.ceil((double)pile/mid); 
+            if (hours > h) return false; 
+        }
+        return hours <= h;
+    }
+}
