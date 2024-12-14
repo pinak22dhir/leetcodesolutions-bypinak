@@ -1,0 +1,36 @@
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int max=0;
+        for(int i=0;i<nums.length;i++){
+          max=Math.max(max,nums[i]);
+        }
+        int ans=binary(nums,1,max,threshold);
+        return ans;
+    }
+    static int binary(int nums[],int a,int b,int thresh){
+        int l=a;
+        int h=b;
+        int si=-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(helper(nums,mid,thresh)){
+               si=mid;
+             h=mid-1;
+            }
+            else{
+                l=mid+1;
+            }
+
+        }
+        return si;
+    }
+    static boolean helper(int arr[],int mid,int thresh){
+        int c=0;
+        for(int i=0;i<arr.length;i++){
+        c+=Math.ceil((double)arr[i]/mid);
+        }
+        return c<=thresh;
+    }
+
+
+}
