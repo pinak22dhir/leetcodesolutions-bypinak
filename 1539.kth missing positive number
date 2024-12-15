@@ -1,0 +1,50 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        if(arr[arr.length-1]==arr.length){
+            return arr[arr.length-1]+k;
+        }
+        int ans=binary(arr,k);
+        if(ans==-1){
+            int value=arr[arr.length-1]-(arr.length);
+            int find=k-value;
+           return arr[arr.length-1]+find;
+        }
+        int c=0;
+        int a=arr[ans]-1;
+        int index=ans-1;  
+      int val=arr[ans]-(ans+1);
+      int val2=arr[ans]-1;
+        while(true){
+            if(index>=0){
+            if(val2==arr[index]){
+                val2--;
+                index--;
+              continue;
+            }
+            }
+            if(val==k){
+                return val2;
+            }
+             val--;
+            val2--;
+        }
+    }
+    static int binary(int arr[],int k){
+        int l=0;
+        int r=arr.length-1;
+        int si=-1;
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            int mid2=arr[mid]-(mid+1);
+           
+           if(mid2<k){
+              l=mid+1;
+            }
+             else{
+               si=mid; 
+               r=mid-1;
+            }
+        }
+        return si;
+    }
+}
