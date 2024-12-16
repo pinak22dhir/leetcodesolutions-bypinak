@@ -1,0 +1,28 @@
+class Solution {
+    static class pair{
+        int a;
+        int b;
+        pair(int a,int b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+    public int[] getFinalState(int[] nums, int k, int multiplier) {
+        PriorityQueue<pair>p=new PriorityQueue<>((c,d)->{
+            int cmp=Integer.compare(c.a,d.a);
+            return (cmp!=0)?cmp:Integer.compare(c.b,d.b);
+        });
+        for(int i=0;i<nums.length;i++){
+            p.add(new pair(nums[i],i));
+        }
+        while(k!=0){
+          pair pi=p.poll();
+          int val=pi.a*multiplier;
+          int index=pi.b;
+          p.add(new pair(val,index));
+          nums[index]=val;
+          k--;
+        }
+         return nums;
+}
+}
