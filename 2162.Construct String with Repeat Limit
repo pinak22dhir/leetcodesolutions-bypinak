@@ -1,0 +1,48 @@
+class Solution {
+    static class pair{
+        char  a;
+        int b;
+        pair(char a,int b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+    public String repeatLimitedString(String s, int k) {
+        PriorityQueue<pair>pq=new PriorityQueue<>((c,d)->Character.compare(d.a,c.a));
+        Map<Character,Integer> mp=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1); 
+        }
+        for(Map.Entry<Character,Integer>entry:mp.entrySet()){
+           pq.add(new pair(entry.getKey(),entry.getValue()));
+           System.out.print(entry.getKey()+" "+entry.getValue());
+        }
+        StringBuilder result=new StringBuilder();
+        while(!pq.isEmpty()){
+        pair p=pq.poll();
+        if( result.length()!=0 && p.a==result.charAt(result.length()-1)){
+            if(!pq.isEmpty()){
+            pair next=pq.poll();
+            result.append(next.a);
+            next.b--;
+                if(next.b>0){pq.add(next);}
+            }
+            else{
+                continue;
+            }
+        }
+            int val=p.b;
+            if(val>k){
+                int nval=val-k;
+                pq.add(new pair(p.a,nval));
+            }
+            val=Math.min(val,k);
+        
+            while(val!=0){
+                result.append(p.a);
+                val--;
+            }
+        }
+        return result.toString();
+    }
+}
