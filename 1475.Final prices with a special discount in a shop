@@ -1,0 +1,22 @@
+class Solution {
+    static class pair{
+        int a;
+        int b;
+        pair(int a,int b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+    public int[] finalPrices(int[] prices) {
+        Stack<pair> stack=new Stack<>();
+        stack.push(new pair(prices[0],0));
+        for(int i=1;i<prices.length;i++){
+            while(!stack.isEmpty() && stack.peek().a>=prices[i]){
+                prices[stack.peek().b]=stack.peek().a-prices[i];
+                stack.pop();
+            }
+            stack.add(new pair(prices[i],i));
+        }
+        return prices;   
+    }
+}
