@@ -1,0 +1,87 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    static class pair{
+        TreeNode a;
+        int b;
+        pair(TreeNode a,int b){
+            this.a=a;
+            this.b=b;
+        }
+    }
+    public TreeNode reverseOddLevels(TreeNode root) {
+        Queue<pair>qu=new LinkedList<>();
+        qu.add(new pair(root,0));
+        int level=0;
+        ArrayList<TreeNode>li=new ArrayList<>();
+        while(!qu.isEmpty()){
+            pair queue=qu.poll();
+            TreeNode top=queue.a;
+            int value=queue.b;
+            if(value%2!=0 && value!=level){
+                binary(root,li);
+                level=value;
+            }
+            if(value%2==0 && value!=level){
+            li=new ArrayList<>();
+            level=value;
+            }
+            if(value%2==0 && level==value){
+             li.add(top);
+            }
+
+            if(top.left!=null){
+                qu.add(new pair(top.left,value+1));
+            }
+             if(top.right!=null){
+                qu.add(new pair(top.right,value+1));
+            }
+        }
+        return root;
+    }
+    static void binary(TreeNode root,ArrayList<TreeNode>li) 
+    {
+        int i=0;
+        int j=li.size()-1;
+        if(i==j){
+           int a=li.get(i).left.val;
+           li.get(i).left.val=li.get(j).right.val;
+           li.get(j).right.val=a;
+        }
+        while(i<j){
+          bfs(li.get(i),li.get(j));
+            i++;
+            j--;
+        }
+    }
+    static  void bfs(TreeNode root1,TreeNode root2){
+        if(root1==null && root2==null){
+            return ;
+        }
+        if(root1==null){
+            return ;
+        }
+        if(root2==null){
+            return ;
+        }
+            int temp=root1.right.val;
+            root1.right.val=root2.left.val;
+            root2.left.val=temp;
+            int temp2=root1.left.val;
+            root1.left.val=root2.right.val;
+            root2.right.val=temp2;
+    }
+}
