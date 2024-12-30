@@ -1,0 +1,30 @@
+import java.util.Arrays;
+
+class Solution {
+    public int countGoodStrings(int low, int high, int zero, int one) {
+         // Initialize dp with -1 to indicate that no value has been computed
+            int[] dp = new int[high + 1];
+            Arrays.fill(dp, -1);
+        int result = 0;
+        for (int i = low; i <= high; i++) {
+            
+            result = (result + countWays(i, zero, one, dp)) % 1000000007;  // Sum the valid strings for lengths from low to high
+        }
+        
+        return result;
+    }
+    
+    // Recursive function to calculate the number of ways to form a string of length 'n'
+    private int countWays(int n, int zero, int one, int[] dp) {
+        if (n == 0) return 1;  // Base case: There's one way to form a string of length 0 (the empty string)
+        
+        if (dp[n] != -1) return dp[n];  // If we've already calculated this, return the result
+        
+        int ways = 0;
+        if (n >= zero) ways = (ways + countWays(n - zero, zero, one, dp)) % 1000000007;  // Add ways to form strings by adding 'zero'
+        if (n >= one) ways = (ways + countWays(n - one, zero, one, dp)) % 1000000007;    // Add ways to form strings by adding 'one'
+        
+        dp[n] = ways;  // Store the result in dp array for future reference
+        return dp[n];
+    }
+}
