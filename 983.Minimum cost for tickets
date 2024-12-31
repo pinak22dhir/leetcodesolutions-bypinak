@@ -1,0 +1,21 @@
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        int dp[]=new int[366];
+        Set<Integer> set=new HashSet<>();
+        for(int i=0;i<days.length;i++){
+            set.add(days[i]);
+        }
+        for(int i=1;i<=365;i++){
+            int val=0;
+         if(set.contains(i)){
+            val=Math.min(costs[0]+dp[Math.max(0,i-1)],Math.min(costs[1]+dp[Math.max(0,i-7)],costs[2]+dp[Math.max(0,i-30)]));
+         }
+         else{
+            val=dp[i-1];
+         }
+         dp[i]=val;
+        }
+        return dp[365];
+    }
+   
+}
