@@ -1,0 +1,25 @@
+class Solution {
+    public int maxScore(String s) {
+        int presum=0;
+        int suffix=0;
+
+       for(int i=s.length()-1;i>=1;i--){
+         if(s.charAt(i)=='1'){
+            suffix=suffix+1;
+         }
+        }
+        int max=Integer.MIN_VALUE;
+          for(int i=1;i<s.length();i++){
+            if(max<presum+suffix){
+                max=presum+suffix;
+            }
+            if(s.charAt(i)=='0'){
+                 presum+=1;
+            }
+            else{
+              suffix-=1;
+            }
+        }
+   return max;
+    }
+}
