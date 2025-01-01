@@ -1,0 +1,22 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+    List<List<Integer>> dp=new ArrayList<>(triangle.size());
+    for(int i=0;i<triangle.size();i++){
+        dp.add(new ArrayList<>(triangle.get(i).size()));
+        for(int j=0;j<triangle.get(i).size();j++){
+            dp.get(i).add(-1);
+        }
+    }
+      int helper2=  helper(0,0,triangle,dp);
+      return helper2;
+    }
+    static int helper(int i,int j,List<List<Integer>> triangle,List<List<Integer>> dp){
+        if(i==triangle.size()){return 0;}
+        if(j==triangle.get(i).size()){return 0;}
+        if(dp.get(i).get(j)!=-1){return dp.get(i).get(j);}
+          int sum=0;
+          sum=triangle.get(i).get(j)+Math.min(helper(i+1,j,triangle,dp),helper(i+1,j+1,triangle,dp));
+          dp.get(i).set(j,sum);
+          return sum;
+    }
+}
