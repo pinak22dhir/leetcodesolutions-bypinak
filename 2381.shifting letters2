@@ -1,0 +1,25 @@
+class Solution {
+    public String shiftingLetters(String s, int[][] shifts) {
+        int n = s.length();
+        int[] shiftArr = new int[n]; 
+        for (int[] shift : shifts) {
+            int start = shift[0];
+            int end = shift[1];
+            int direction = shift[2] == 1 ? 1 : -1;
+           
+             for (int i = start; i<= end; i++) {
+            shiftArr[i] += direction;
+        }
+        }
+
+        
+        StringBuilder result = new StringBuilder(s);
+        
+        for (int i = 0; i < n; ++i) {
+            int netShift = (shiftArr[i] % 26 + 26) % 26;
+            result.setCharAt(i, (char) ('a' + (s.charAt(i) - 'a' + netShift) % 26));
+        }
+
+        return result.toString();
+    }
+}
