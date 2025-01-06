@@ -1,0 +1,30 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
+         int arr2[][]=new int[intervals.length][2];
+         if(intervals.length==0){
+            return arr2;
+         }
+        int arr=intervals[0][0];
+        int depar=intervals[0][1];
+        int j=0;
+       
+     for(int i=1;i<intervals.length;i++){
+        if(depar<intervals[i][0]){
+            arr2[j][0]=arr;
+            arr2[j][1]=depar;
+            arr=intervals[i][0];
+            depar=intervals[i][1];
+            j++;
+        }
+        else{
+            arr=Math.min(arr,intervals[i][0]);
+            depar=Math.max(depar,intervals[i][1]);
+        }
+     }
+     arr2[j][0]=arr;
+     arr2[j][1]=depar;
+     int mi[][]=Arrays.copyOf(arr2,j+1);
+     return mi;
+    }
+}
