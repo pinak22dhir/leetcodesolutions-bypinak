@@ -1,0 +1,16 @@
+class Solution {
+    public int longestSubsequence(int[] arr, int d) {
+       Map<Integer,Integer>mp=new HashMap<>();
+       int max=0;
+       for(int i=0;i<arr.length;i++){
+        if(mp.containsKey(arr[i]-d)){
+            mp.put(arr[i],mp.getOrDefault(arr[i]-d,0)+1);
+        }
+        else{
+            mp.put(arr[i],1);
+        }
+        max=Math.max(max,mp.get(arr[i]));
+       } 
+       return max;
+    }
+}
