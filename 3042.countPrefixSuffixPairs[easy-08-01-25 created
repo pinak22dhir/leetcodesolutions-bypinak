@@ -1,0 +1,20 @@
+class Solution {
+    public int countPrefixSuffixPairs(String[] words) {
+        int c=0;
+        for(int i=0;i<words.length;i++){
+            String alphabet=words[i];
+            int size=words[i].length();
+            for(int j=i+1;j<words.length;j++){
+                if(words[j].length()>=size){
+                   String prefix=words[j].substring(0,size);
+                   String suffix=words[j].substring(words[j].length()-size,words[j].length());
+                   if(prefix.equals(suffix) && prefix.equals(alphabet)){
+                    c++;
+                   }
+
+                }
+            }
+        }
+        return c;
+    }
+}
