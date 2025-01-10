@@ -1,0 +1,68 @@
+class Solution {
+    public List<String> wordSubsets(String[] words1, String[] words) {
+        List<String>st=new ArrayList<>();
+        // List<pair>list=new ArrayList<>();
+        Map<Character,Integer>mp=new HashMap<>();
+        int size=0;
+        
+        for(int i=0;i<words.length;i++){
+            for(int j=0;j<words[i].length();){
+                String str=sort(words[i]);
+                int c=0;
+                char character=words[i].charAt(j);
+                while(j<words[i].length() && character==words[i].charAt(j)){
+                    c++;
+                    j++;
+                }
+                if(mp.containsKey(character)){
+                   int val=mp.get(character);
+                   mp.put(character,Math.max(val,c));
+                }
+                else{
+                     mp.put(character,c);
+                }
+            }
+        }
+        char[] words2=new char[100];
+        int k=0;
+     for(Map.Entry<Character,Integer> map:mp.entrySet()){
+        int  freq=map.getValue();
+        // System.out.print("freq"+freq);
+        for(int l=0;l<freq;l++){
+        words2[k++]=map.getKey();
+        }
+     }
+    for(int i=0;i<words1.length;i++){
+        if(helper(words1[i],mp)){
+            System.out.println(words1[i]);
+              st.add(words1[i]);
+            // System.out.print(9);
+        }
+    }
+
+System.out.print(st.size());
+return st.subList(0,st.size());
+    }
+    static String sort(String word){
+        char a[]=word.toCharArray();
+        Arrays.sort(a);
+        return new String(a);
+    }
+    static boolean helper(String word, Map<Character, Integer> requiredFreq) {
+        Map<Character, Integer> wordFreq = new HashMap<>();
+        // Count frequencies in the word
+        for (char c : word.toCharArray()) {
+            wordFreq.put(c, wordFreq.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : requiredFreq.entrySet()) {
+            char c = entry.getKey();
+            int requiredCount = entry.getValue();
+            if (wordFreq.getOrDefault(c, 0) < requiredCount) {
+                return false;  
+            }
+        }
+
+        return true; 
+    }
+
+}
