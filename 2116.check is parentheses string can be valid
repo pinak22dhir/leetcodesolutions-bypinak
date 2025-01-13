@@ -1,0 +1,35 @@
+class Solution {
+    public boolean canBeValid(String s, String locked) {
+        if(s.length()%2!=0){
+            return false;
+        }
+      Stack<Integer>openstack=new Stack<>();
+      Stack<Integer>closestack=new Stack<>();
+      for(int i=0;i<s.length();i++){
+        if(locked.charAt(i)=='1'){
+            if(s.charAt(i)=='(') {openstack.add(i);}
+           else if(s.charAt(i)==')'&& !openstack.isEmpty())         {
+                openstack.pop();
+            }
+            else if(s.charAt(i)==')' && closestack.isEmpty()){          return false;
+        }
+         else if(s.charAt(i)==')' && !closestack.isEmpty())    {         closestack.pop();
+        }
+        }
+        if(locked.charAt(i)=='0'){
+            closestack.add(i);
+        }
+    } 
+   
+    if(openstack.isEmpty()){
+        System.out.print(closestack.size());return true;}
+    if(!openstack.isEmpty() && closestack.isEmpty()){return false;}
+    while(!openstack.isEmpty() && !closestack.isEmpty()){
+          int peek=openstack.pop();
+          int peek2=closestack.pop();
+          if(peek>peek2){return false;}
+    }
+    System.out.print(closestack.size());
+    return openstack.isEmpty();
+    }
+}
