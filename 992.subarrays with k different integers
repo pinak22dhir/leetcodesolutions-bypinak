@@ -1,0 +1,25 @@
+class Solution {
+    public int subarraysWithKDistinct(int[] arr, int k) {
+        int ans=atmost(arr,k)-atmost(arr,k-1);
+        return ans;
+    }
+    static int atmost(int arr[],int k){
+        Map<Integer,Integer>mp=new HashMap<>();
+        int left=0;
+        int right=0;
+        int c=0;
+        while(right<arr.length){
+        mp.put(arr[right],mp.getOrDefault(arr[right],0)+1);
+        while(mp.size()>k){
+            mp.put(arr[left],mp.getOrDefault(arr[left],0)-1);
+            if(mp.get(arr[left])==0){
+                mp.remove(arr[left]);
+            }
+            left++;
+        }
+        c+=right-left+1;
+        right++;
+        }
+    return c;
+    }
+}
