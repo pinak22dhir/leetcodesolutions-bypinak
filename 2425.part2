@@ -1,0 +1,16 @@
+public class Solution {
+    public int xorAllNums(int[] nums1, int[] nums2) {
+        int xor1 = 0;
+        for (int num : nums2) {
+            xor1 ^= num; 
+        }
+        int finali = 0;
+        for (int num : nums1) {
+            int ans=0;
+            if(nums2.length%2!=0){ans=num^xor1;}
+            else{ans=xor1;}
+            finali ^= ans;  
+        }
+           return finali;
+    }
+}
