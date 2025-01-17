@@ -1,0 +1,26 @@
+public class Solution {
+    public long countGood(int[] nums, int k) {
+        int l = 0;
+        int r = 0;
+        long s = 0;
+        Map<Integer, Integer> mp = new HashMap<>();
+        long c = 0;
+        long ans = 0;
+        
+        while (r < nums.length) {
+            mp.put(nums[r], mp.getOrDefault(nums[r], 0) + 1);
+            int val = mp.get(nums[r]);
+            c += val - 1;
+            
+            while (c >= k) {
+                ans += nums.length-r;
+                mp.put(nums[l], mp.getOrDefault(nums[l], 0) - 1);
+                int val2 = mp.get(nums[l]);
+                c -= val2 ;
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+}
