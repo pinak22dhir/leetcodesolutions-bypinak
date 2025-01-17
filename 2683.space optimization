@@ -1,0 +1,19 @@
+class Solution {
+    public boolean doesValidArrayExist(int[] derived) {
+        return helper(0, 0, 0,derived) || helper(0, 1,1, derived);
+    }
+    static boolean helper(int i, int value,int s, int[] derived) {
+        if (i == derived.length) {
+            return true;  
+        }
+
+        int nextValue = (derived[i] == 1) ? 1 - value : value;
+
+        if (i == derived.length - 1) {
+            if ((derived[i] == 1 && value == s) || (derived[i] == 0 && value !=s)) {
+                return false;
+            }
+        }
+        return helper(i + 1, nextValue,s, derived);
+    }
+}
