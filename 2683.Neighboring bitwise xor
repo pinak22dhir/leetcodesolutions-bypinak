@@ -1,0 +1,35 @@
+class Solution {
+    public boolean doesValidArrayExist(int[] derived) {
+        int arr[]=new int[derived.length];
+        arr[0]=0;
+        boolean flag=helper(0,arr,derived);
+        arr[0]=1;
+        boolean flag2=helper(0,arr,derived);
+        return flag||flag2;
+    }
+    static boolean helper(int i,int[] arr,int []derived){
+        if(i==arr.length){return true;}
+        if(i==arr.length-1){
+            if(derived[i]==1){
+              if(arr[i]==0 && arr[0]==0){return false;}
+              if(arr[i]==1 && arr[0]==1){return false;}
+              else{return true;}
+            }
+            if(derived[i]==0){
+              if(arr[i]==0 && arr[0]==1){return false;}
+              if(arr[i]==1 && arr[0]==0){return false;}
+              else{return true;}
+            }
+        }
+        if(derived[i]==1){
+            if(arr[i]==1){arr[i+1]=0;}
+            if(arr[i]==0){arr[i+1]=1;}
+        }
+        if(derived[i]==0){
+            if(arr[i]==1){arr[i+1]=1;}
+            if(arr[i]==0){arr[i+1]=0;}
+        }
+        return helper(i+1,arr,derived);
+
+    }
+}
