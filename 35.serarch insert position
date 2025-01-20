@@ -1,0 +1,22 @@
+class Solution {
+    public int searchInsert(int[] arr, int target) {
+        int l=0;
+        int ind=-1;
+        int r=arr.length-1;
+    
+        while(l<=r){
+            int mind=l+(r-l)/2;
+            if(arr[mind]==target){
+                return mind; 
+            }
+            if(arr[mind]<=target){
+                ind=mind;
+                l=mind+1;
+            }
+            else{
+                r=mind-1;
+            }
+        }
+        return ind+1;
+    }
+}
