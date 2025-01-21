@@ -1,0 +1,19 @@
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        int s=0;
+        Map<Integer,Integer>mp=new HashMap<>();
+        mp.put(0,-1);
+        for(int i=0;i<nums.length;i++){
+             s+=nums[i];
+             int minus=s%k;
+             if(mp.containsKey(minus)){
+                int l1=mp.get(minus);
+                if(i-l1<2){continue;}
+                else{return true;}
+             }
+             else{mp.put(minus,i);}
+        }
+        return false;
+        
+    }
+}
