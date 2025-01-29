@@ -1,0 +1,25 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int ans[][]=new int[board.length][board[0].length];
+        for(int i=0;i<board.length;i++){
+           for(int j=0;j<board[i].length;j++){
+            if(word.charAt(0)==board[i][j]){
+                if(helper(i,j,word,board,0,ans)){
+                    return true;
+                }
+            }
+           }
+        }
+    return false;
+    }
+    static boolean helper(int a,int b,String word,char[][] board,int match,int ans[][]){
+           if(match==word.length()){return true;}
+           if(a>=board.length||a<0||b<0||b>=board[a].length||board[a][b]!=word.charAt(match)||ans[a][b]==1){
+            return false;
+           }
+           ans[a][b]=1;
+           boolean found=helper(a+1,b,word,board,match+1,ans)||helper(a-1,b,word,board,match+1,ans)
+||helper(a,b+1,word,board,match+1,ans)||helper(a,b-1,word,board,match+1,ans);
+ans[a][b]=0;
+return found;    }
+}
