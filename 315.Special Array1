@@ -1,0 +1,75 @@
+LeetCode Logo
+Daily Question
+0
+
+avatar
+Premium
+Debugging...
+Debugging...
+
+
+
+
+
+
+
+Run
+Description
+Description
+Editorial
+Editorial
+Solutions
+Solutions
+Submissions
+Submissions
+Testcase
+Testcase
+Test Result
+Test Result
+Code
+Code
+Loading...
+
+
+All Submissions
+
+Accepted
+852 / 852 testcases passed
+pinak dhir
+pinak dhir
+submitted at Feb 01, 2025 10:04
+
+Editorial
+
+Solution
+Runtime
+0
+ms
+Beats
+100.00%
+Analyze Complexity
+Memory
+43.56
+MB
+Beats
+32.60%
+Analyze Complexity
+Code
+Java
+class Solution {
+    public boolean isArraySpecial(int[] nums) {
+        for(int i=0;i<nums.length-1;i++){
+            if(sameparity(nums[i],nums[i+1])){return false;}
+        }
+    return true; 
+    }
+    static boolean sameparity(int num1,int num2){
+        return ((num1%2==0 && num2%2==0)||(num1%2!=0 && num2%2!=0));
+    }
+}
+Write your notes here
+Select related tags
+0/5
+
+
+
