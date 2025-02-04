@@ -1,0 +1,16 @@
+class Solution {
+    public int maxAscendingSum(int[] arr) {
+    int sum=arr[0];
+    int m=sum;
+    for(int i=1;i<arr.length;i++){
+       if(arr[i-1]<arr[i]){
+        sum+=arr[i];
+       }
+       else{
+        sum=arr[i];
+       }
+     m=Math.max(m,sum);   
+    }
+    return m;
+    }
+}
