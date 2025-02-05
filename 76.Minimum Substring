@@ -1,0 +1,36 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        if(s.length()<t.length()){return "";}
+        int arr[]=new int[58];
+        int arr2[]=new int[58];
+        for(int i=0;i<t.length();i++){
+            arr[t.charAt(i)-'A']++;
+        }
+     String ans="";
+        int i=0;int j=0;
+        int maxl=Integer.MAX_VALUE;
+        while(j<s.length()){
+              arr2[s.charAt(j)-'A']++;
+              while(helper(arr,arr2) && i<=j){
+               int k=j-i+1;
+               if(maxl>k){
+                maxl=k;
+                ans=s.substring(i,j+1);
+               }
+               if(arr2[s.charAt(i)-'A']-1>=0){
+               arr2[s.charAt(i)-'A']--;
+               }
+               i++;
+              }
+              j++;
+        }
+        return ans;
+    }
+    static boolean helper(int arr[],int arr2[]){
+        for(int i=0;i<arr2.length;i++){
+            if(arr2[i]<arr[i]){return false;}  
+        }
+        return true;
+
+    }
+}
