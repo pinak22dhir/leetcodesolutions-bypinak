@@ -1,0 +1,30 @@
+class Solution {
+    public int[] closestPrimes(int left, int right) {
+        int[] newarr=new int[2];
+     ArrayList<Integer>li=new ArrayList<>();
+     for(int i=left;i<=right;i++){
+      
+      if(prime(i)){
+          li.add(i);}
+     }
+     int max=Integer.MAX_VALUE;
+     int one=0;
+     int two=0;
+     if(li.size()==1||li.size()==0){return new int[]{-1,-1};};
+     for(int i=0;i<li.size()-1;i++){
+        int val=li.get(i+1)-li.get(i);
+           if(max>val){
+            one=li.get(i);
+            two=li.get(i+1);
+            max=val;
+           }
+     }
+     return new int[]{one,two};}
+    public boolean prime(int num){
+        if(num<=1){return false;}
+        for(int i=2;i<=Math.sqrt(num);i++){
+            if((num%i)==0){return false;}
+        }
+        return true;
+    }
+}
