@@ -1,0 +1,25 @@
+class Solution {
+    public int numTilings(int n) {
+        int mod = 1_000_000_007;
+
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+
+        long[] full = new long[n + 1];
+        long[] topwise = new long[n + 1];
+        long[] btmwise = new long[n + 1];
+
+        full[1] = 1;
+        full[2] = 2;
+        topwise[2] = 1;
+        btmwise[2] = 1;
+
+        for (int i = 3; i <= n; i++) {
+            topwise[i] = (btmwise[i - 1] + full[i - 2]) % mod;
+            btmwise[i] = (topwise[i - 1] + full[i - 2]) % mod;
+            full[i] = (full[i - 1] + full[i - 2] + topwise[i - 1] + btmwise[i - 1]) % mod;
+        }
+
+        return (int) full[n];
+    }
+}
