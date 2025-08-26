@@ -1,0 +1,19 @@
+class Solution {
+    public int areaOfMaxDiagonal(int[][] dimensions) {
+    int finalArea=Integer.MIN_VALUE;
+    float longestDiagonal=0;
+    for(int i=0;i<dimensions.length;i++){
+          float presentDiagonal=(float)Math.sqrt((dimensions[i][0]*dimensions[i][0])
+            +(dimensions[i][1]*dimensions[i][1]));
+             int area=dimensions[i][0]*dimensions[i][1];
+            if(longestDiagonal<presentDiagonal){
+                longestDiagonal=presentDiagonal;  
+                finalArea=area;
+              }
+            if(longestDiagonal==presentDiagonal){
+              finalArea=Math.max(area,finalArea);
+            }
+    }
+    return finalArea;
+    }
+}
