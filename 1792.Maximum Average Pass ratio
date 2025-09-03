@@ -1,0 +1,56 @@
+
+
+class Solution {
+    class Pair implements Comparable<Pair> {
+        int pass, total;
+        double gain;
+
+        Pair(int pass, int total) {
+            this.pass = pass;
+            this.total = total;
+            this.gain = calcGain(pass, total);
+        }
+
+        // Calculate gain if one extra student is added
+        private double calcGain(int pass, int total) {
+            double currentRatio = (double) pass / total;
+            double newRatio = (double) (pass + 1) / (total + 1);
+            return newRatio - currentRatio;
+        }
+
+        public int compareTo(Pair other) {
+            // Max-heap behavior: bigger gain has higher priority
+            return Double.compare(other.gain, this.gain);
+        }
+    }
+
+    public double maxAverageRatio(int[][] classes, int extraStudents) {
+        PriorityQueue<Pair> maxHeap = new PriorityQueue<>();
+        double sum = 0;
+
+        // Initialize max heap with current classes
+        for (int[] cls : classes) {
+            int pass = cls[0], total = cls[1];
+            sum += (double) pass / total;
+            maxHeap.offer(new Pair(pass, total));
+        }
+
+        // Distribute extra students to classes with max gain
+        while (extraStudents > 0) {
+            Pair top = maxHeap.poll();
+            sum -= (double) top.pass / top.total;
+
+            // Add one extra student
+            top.pass++;
+            top.total++;
+            sum += (double) top.pass / top.total;
+
+            // Recalculate gain and add back to heap
+            top.gain = top.calcGain(top.pass, top.total);
+            maxHeap.offer(top);
+            extraStudents--;
+        }
+
+        return sum / classes.length;  // Return average ratio
+    }
+}
