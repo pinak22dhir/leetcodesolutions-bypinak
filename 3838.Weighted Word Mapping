@@ -1,0 +1,21 @@
+class Solution {
+    public String mapWordWeights(String[] words, int[] weights) {
+        int[] chars=new int[26];
+        String ans="";
+
+        for(int i=0;i<words.length;i++){
+            int s=0;
+            String p=words[i];
+            for(int j=0;j<words[i].length();j++){
+                char a=p.charAt(j);
+                int val=a-'a';
+                s+=weights[val];
+            }
+            s=s%26;
+           
+            char c=(char)(26-s+96);
+            ans+=c;
+        }
+        return ans;
+    }
+}
